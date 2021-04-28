@@ -77,7 +77,13 @@ public class Guerrier {
 
 	@Override
 	public String toString() {
-		return "Guerrier [name=" + name + ", lifeLevel=" + lifeLevel + ", strongLevel=" + strongLevel + ", weapon="
-				+ weapon + ", shield=" + shield + "]";
+		String output = "";
+		output += "Nom du guerrier : " + name + "\n";
+		output += "-----------------------\n";
+		output += "\n";
+		output += "niveau de vie : " + lifeLevel + "\n";
+		output += "niveau d'atttaque : " + strongLevel + "\n";
+		output += "-----------------------------------------\n";
+		return output;
 	}
 }

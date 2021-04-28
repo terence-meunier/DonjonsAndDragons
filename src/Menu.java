@@ -2,10 +2,14 @@ import java.util.Scanner;
 
 public class Menu {
 	
+	// Objet Scanner pour récupèrer les entrées du clavier
 	static Scanner input = new Scanner(System.in);
+	// Objet Guerrier
 	static Guerrier warrior = null;
+	// Objet Magicien
 	static Magicien wizard = null;
 	
+	// Menu principal
 	private static int mainMenu() {
 		System.out.println("--------------------------");
 		System.out.println("--- DONJON AND DRAGONS ---");
@@ -14,9 +18,14 @@ public class Menu {
 		System.out.println("--- MENU ---");
 		System.out.println("	1 : Créer un Guerrier");
 		System.out.println("	2 : Créer un Magicien");
-		System.out.println("	3 : Quitter le programme");
 		if (warrior != null) {
-			System.out.println("	4 : Afficher le guerrier " + warrior.getName());
+			System.out.println("	3 : Afficher " + warrior.getName());
+			System.out.println("	4 : Quitter le programme");
+		} else if (wizard != null) {
+			System.out.println("	3 : Afficher " + wizard.getName());
+			System.out.println("	4 : Quitter le programme");
+		} else {
+			System.out.println("	4 : Quitter le programme");
 		}
 		System.out.println("Entrez votre choix : ");
 		int inputChoice = input.nextInt();
@@ -24,36 +33,44 @@ public class Menu {
 		return inputChoice;
 	}
 	
-	private static void warriorMenu() {
-		int choice = 0;
-		while (choice != 3) {
-			System.out.println("-------------------------------------------");
-			System.out.println("--- Warrior : " + warrior.getName() + " ---");
-			System.out.println("-------------------------------------------");
-			System.out.println();
-			System.out.println(" 1: Afficher ses stats");
-			System.out.println(" 2: Afficher ses stats");
-			System.out.println(" 3: Retour au menu principal");
-			System.out.println();
-			System.out.println("Entrez votre choix : ");
-			choice = input.nextInt();
-			switch (choice) {
-			case 1: {
-				System.out.println(warrior);
-				break;
+	// Menu Warrior
+	private static void characterMenu() {
+		
+		if (warrior != null) {
+			int choice = 0;
+			while (choice != 3) {
+				System.out.println("-------------------------------------------");
+				System.out.println("--- Menu Guerrier " + warrior.getName() + " ---");
+				System.out.println("-------------------------------------------");
+				System.out.println();
+				System.out.println(" 1: Afficher ses stats");
+				System.out.println(" 2: Modifier ses stats");
+				System.out.println(" 3: Retour au menu principal");
+				System.out.println();
+				System.out.println("Entrez votre choix : ");
+				choice = input.nextInt();
+				switch (choice) {
+				case 1: {
+					System.out.println(warrior);
+					break;
+				}
+				case 2: {
+					// Menu modification du warrior
+					System.out.println("Menu de modifications des stats");
+					break;
+				}
+				case 3: {
+					break;
+				}
+				}
 			}
-			case 2: {
-				// Menu modification du warrior
-				System.out.println("Menu de modificatino du warrior");
-				break;
-			}
-			case 3: {
-				break;
-			}
-			}
+		} else if (wizard != null) {
+			System.out.println("Menu magicien : " + wizard.getName());
 		}
+
 	}
 
+	// Ajouter un personnage de type Guerrier
 	private static Guerrier addWarrior() {
 		System.out.println("Entrez le nom du guerrier :");
 		String name = input.nextLine();
@@ -65,6 +82,7 @@ public class Menu {
 		return new Guerrier(name, lifeLevel, strongLevel);
 	}
 	
+	// Ajouter un personnage de type Magicien
 	private static Magicien addWizard() {
 		String name = input.nextLine();
 		int lifeLevel = input.nextInt();
@@ -72,10 +90,11 @@ public class Menu {
 		input.nextLine();
 		return new Magicien(name, lifeLevel, strongLevel);
 	}
-
+	
+	// Programme principal
 	public static void main(String[] args) {	
 		int choice = 0;
-		while (choice != 3) {
+		while (choice != 4) {
 			choice = mainMenu();
 			
 			switch (choice) {
@@ -88,10 +107,11 @@ public class Menu {
 				break;
 			}
 			case 3: {
+				characterMenu();
 				break;
 			}
 			case 4: {
-				warriorMenu();
+				break;
 			}
 			}
 		}
