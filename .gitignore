@@ -1,3 +1,7 @@
+# Ignore All . dir and files
+.*
+.*/
+
 # Compiled class file
 *.class
 
