@@ -109,8 +109,11 @@ public class Menu {
 
 	// Ajouter un personnage de type Magicien
 	private static Magicien addWizard() {
+		System.out.println("Entrez le nom du magicien :");
 		String name = input.nextLine();
+		System.out.println("Entrez ces points de vie :");
 		int lifeLevel = input.nextInt();
+		System.out.println("Entrez sa force d'attaque :");
 		int strongLevel = input.nextInt();
 		input.nextLine();
 		return new Magicien(name, lifeLevel, strongLevel);

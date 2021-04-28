@@ -7,7 +7,7 @@ public class Magicien {
 	private String filter;
 	
 	private int RandNum() {
-		Double j = 5 + Math.random()*5;
+		Double j = 3 + Math.random()*3;
 		return j.intValue();
 	}
 	
