@@ -20,8 +20,11 @@ public class Menu {
 	}
 
 	private static Guerrier addWarrior() {
+		System.out.println("Entrez le nom du guerrier :");
 		String name = input.nextLine();
+		System.out.println("Entrez ces points de vie :");
 		int lifeLevel = input.nextInt();
+		System.out.println("Entrez sa force d'attaque :");
 		int strongLevel = input.nextInt();
 		return new Guerrier(name, lifeLevel, strongLevel);
 	}
