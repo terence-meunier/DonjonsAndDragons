@@ -3,7 +3,7 @@ public class Guerrier {
 	private String name;
 	private int lifeLevel;
 	private int strongLevel;
-	private String weapon;
+	private Weapon weapon;
 	private String shield;
 	
 	private int RandNum() {
@@ -15,7 +15,7 @@ public class Guerrier {
 		this.name = null;
 		this.lifeLevel = RandNum();
 		this.strongLevel = RandNum();
-		this.weapon = "Epée";
+		this.weapon = new Weapon("Epée", 50);
 		this.shield = "Ecu";
 	}
 	
@@ -23,7 +23,7 @@ public class Guerrier {
 		this.name = name;
 		this.lifeLevel = RandNum();
 		this.strongLevel = RandNum();
-		this.weapon = "Epée";
+		this.weapon = new Weapon("Epée", 50);
 		this.shield = "Ecu";
 	}
 	
@@ -31,7 +31,7 @@ public class Guerrier {
 		this.name = name;
 		this.lifeLevel = lifeLevel;
 		this.strongLevel = strongLevel;
-		this.weapon = "Epée";
+		this.weapon = new Weapon("Epée", 50);
 		this.shield = "Ecu";
 	}
 
@@ -59,11 +59,11 @@ public class Guerrier {
 		this.strongLevel = strongLevel;
 	}
 
-	public String getWeapon() {
+	public Weapon getWeapon() {
 		return weapon;
 	}
 
-	public void setWeapon(String weapon) {
+	public void setWeapon(Weapon weapon) {
 		this.weapon = weapon;
 	}
 
