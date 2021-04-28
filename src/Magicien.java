@@ -77,8 +77,14 @@ public class Magicien {
 
 	@Override
 	public String toString() {
-		return "Magicien [name=" + name + ", lifeLevel=" + lifeLevel + ", strongLevel=" + strongLevel + ", spell="
-				+ spell + ", filter=" + filter + "]";
+		String output = "";
+		output += "Nom du magicien : " + name + "\n";
+		output += "-----------------------\n";
+		output += "\n";
+		output += "niveau de vie : " + lifeLevel + "\n";
+		output += "niveau d'atttaque : " + strongLevel + "\n";
+		output += "-----------------------------------------\n";
+		return output;
 	}
 	
 }
