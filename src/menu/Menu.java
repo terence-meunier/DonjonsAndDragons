@@ -27,7 +27,11 @@ public class Menu {
             System.out.println("----------------------");
             System.out.println("--- Menu principal ---");
             System.out.println("----------------------");
-            System.out.println();
+            if (character != null) {
+                System.out.println("Personnage actuel : " + character.getName());
+            } else {
+                System.out.println("Personnage actuel : Aucun");
+            }
             System.out.println("1. Créer un guerrier");
             System.out.println("2. Créer un magicien");
             System.out.println("3. Fiche personnage");
@@ -38,11 +42,17 @@ public class Menu {
 
             switch (choice) {
                 case 1: {
-                    character = new Guerrier("Conan le barbare");
+                    System.out.println("Indiquer le nom du guerrier :");
+                    String name = input.nextLine();
+                    character = new Guerrier(name);
+                    System.out.println(character.getName() + " a bien été créé");
                     break;
                 }
                 case 2: {
-                    character = new Magicien("Gandalf le blanc");
+                    System.out.println("Indiquer le nom du guerrier :");
+                    String name = input.nextLine();
+                    character = new Magicien(name);
+                    System.out.println(character.getName() + " a bien été créé");
                     break;
                 }
                 case 3: {
