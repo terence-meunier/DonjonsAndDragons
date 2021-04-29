@@ -1,3 +1,5 @@
+package characters;
+
 abstract public class Character {
     private String name;
     private int lifeLevel;
@@ -42,5 +44,13 @@ abstract public class Character {
 
     public void setStrongLevel(int strongLevel) {
         this.strongLevel = strongLevel;
+    }
+
+    public int move(int cases) {
+        return 1;
+    }
+
+    public void fight(Character character) {
+        System.out.println(this.name + " attaque " + character.getName());
     }
 }

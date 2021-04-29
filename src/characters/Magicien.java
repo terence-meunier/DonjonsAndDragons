@@ -1,27 +1,22 @@
+package characters;
+
+import stuffs.Spell;
 
 public class Magicien extends Character {
-	private String name;
-	private int lifeLevel;
-	private int strongLevel;
 	private Spell spell;
 	private String filter;
-	
-	private static int RandNum() {
-		Double j = 3 + Math.random()*3;
-		return j.intValue();
-	}
-	
+
 	public Magicien() {
 		this(null);
 	}
 	
 	public Magicien(String name) {
-		this(name, RandNum(), RandNum());
+		this(name, 3, 8);
 	}
 	
 	public Magicien(String name, int lifeLevel, int strongLevel) {
 		super(name, lifeLevel, strongLevel);
-		this.spell = new Spell("Eclair", 40);
+		this.spell = null;
 		this.filter = "Soin";
 	}
 
