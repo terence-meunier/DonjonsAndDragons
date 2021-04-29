@@ -4,11 +4,13 @@ abstract public class Character {
     private String name;
     private int lifeLevel;
     private int strongLevel;
+    private int position;
 
     public Character(String name, int lifeLevel, int strongLevel) {
         this.name = name;
         this.lifeLevel = lifeLevel;
         this.strongLevel = strongLevel;
+        this.position = 0;
     }
 
     public String toString() {
@@ -21,6 +23,10 @@ abstract public class Character {
         output += "-----------------------------------------\n";
         return output;
     }
+
+    public int getPosition() { return position; }
+
+    public void setPosition(int position) { this.position = position; }
 
     public String getName() {
         return name;

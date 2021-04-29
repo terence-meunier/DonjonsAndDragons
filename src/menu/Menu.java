@@ -3,23 +3,17 @@ package menu;
 import characters.Character;
 import characters.Guerrier;
 import characters.Magicien;
-import game.Dice;
-import game.GameBoard;
 import java.util.Scanner;
 
 public class Menu {
     private static Scanner input = new Scanner(System.in);
-    private GameBoard gameBoard;
-    private Dice de;
     private Character character;
 
     public Menu() {
-        this.gameBoard = new GameBoard();
-        this.de = new Dice();
         this.character = null;
     }
 
-    private void mainMenu() {
+    public Character mainMenu() {
         int choice = 0;
 
         while (choice != 4) {
@@ -35,7 +29,8 @@ public class Menu {
             System.out.println("1. Créer un guerrier");
             System.out.println("2. Créer un magicien");
             System.out.println("3. Fiche personnage");
-            System.out.println("4. Quitter le jeu");
+            System.out.println("4. Lancer le jeu");
+            System.out.println("5. Quitter le jeu");
 
             choice = input.nextInt();
             input.nextLine();
@@ -64,7 +59,19 @@ public class Menu {
                     break;
                 }
                 case 4: {
+                    if (character != null) {
+                        System.out.println("**********************************");
+                        System.out.println("****** BIENVENUE DANS D&D ********");
+                        System.out.println("**********************************");
+                    } else {
+                        choice = 0;
+                        System.out.println("Merci de créer un personnage avant de lancer le jeu");
+                    }
+                    break;
+                }
+                case 5: {
                     System.out.println("Fin du jeu");
+                    System.exit(0);
                     break;
                 }
                 default: {
@@ -72,6 +79,7 @@ public class Menu {
                 }
             }
         }
+        return character;
     }
 
     public void subMenuCharacter() {
@@ -165,6 +173,6 @@ public class Menu {
     }
 
     public void runGame() {
-        this.mainMenu();
+
     }
 }
