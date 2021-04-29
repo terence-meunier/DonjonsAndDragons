@@ -1,13 +1,18 @@
 package menu;
 
+import java.util.Scanner;
+
 import characters.Character;
 import characters.Guerrier;
 import characters.Magicien;
-import java.util.Scanner;
+
+import game.Dice;
+import game.GameBoard;
 
 public class Menu {
     private static Scanner input = new Scanner(System.in);
     private Character character;
+    private GameBoard gameBoard;
 
     public Menu() {
         this.character = null;
@@ -172,7 +177,27 @@ public class Menu {
         }
     }
 
-    public void runGame() {
+    public void playMenu() {
+        System.out.println("Lancé le Dé en appuyant sur Entrée");
+        input.nextLine();
+    }
 
+    public void runGame(Character character, GameBoard gameBoard, Dice dice) {
+        this.character = character;
+        this.gameBoard = gameBoard;
+        while (character.getPosition() < 64 && character.getLifeLevel() > 0) {
+            this.playMenu();
+            int diceValue = dice.throwDice();
+            int newCharacterPosition = character.getPosition() + diceValue;
+            character.setPosition(newCharacterPosition);
+        }
+
+        if (character.getLifeLevel() < 0) {
+            System.out.println("Perdu le joueur est mort");
+        } else {
+            System.out.println("Bravo !!! Vous avez gagné");
+        }
+
+        System.out.println("Fin de partie");
     }
 }

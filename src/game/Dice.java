@@ -8,7 +8,7 @@ public class Dice {
     }
 
     public int throwDice() {
-        Double randNumber = Math.random()*6;
+        Double randNumber = 1 + Math.random() * 5;
         this.face = randNumber.intValue();
         return this.face;
     }
