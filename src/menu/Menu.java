@@ -75,7 +75,93 @@ public class Menu {
     }
 
     public void subMenuCharacter() {
-        System.out.println(character);
+        int choice = 0;
+
+        while (choice != 3) {
+            // Afficher le menu principal
+            System.out.println("-----------------------");
+            System.out.println("--- Menu personnage ---");
+            System.out.println("-----------------------");
+            System.out.println("1. Voir les stats");
+            System.out.println("2. Modifier les stats");
+            System.out.println("3. Retour menu principal");
+            System.out.println("4. Quitter le jeu");
+
+            choice = input.nextInt();
+            input.nextLine();
+
+            switch (choice) {
+                case 1: {
+                    System.out.println(character);
+                    break;
+                }
+                case 2: {
+                    this.setStatsCharacter();
+                    break;
+                }
+                case 3: {
+                    break;
+                }
+                case 4: {
+                    System.out.println("Fin du jeu");
+                    System.exit(0);
+                    break;
+                }
+                default: {
+                    System.out.println("Choix non valide");
+                }
+            }
+        }
+    }
+
+    public void setStatsCharacter() {
+        int choice = 0;
+
+        while (choice != 4) {
+            System.out.println("------------------------------");
+            System.out.println("--- Modification des stats ---");
+            System.out.println("------------------------------");
+            System.out.println();
+            System.out.println("1. Modifier le nom");
+            System.out.println("2. Modifier les points de vie");
+            System.out.println("3. Modifier le niveau d'attaque");
+            System.out.println("4. Retour");
+            System.out.println("5. Quitter le jeu");
+
+            choice = input.nextInt();
+            input.nextLine();
+
+            switch (choice) {
+                case 1: {
+                    System.out.println("Donner le nouveau nom :");
+                    character.setName(input.nextLine());
+                    break;
+                }
+                case 2: {
+                    System.out.println("Donner les nouveaux points de vie :");
+                    character.setLifeLevel(input.nextInt());
+                    input.nextLine();
+                    break;
+                }
+                case 3: {
+                    System.out.println("Donner les nouveaux points d'attaque :");
+                    character.setStrongLevel(input.nextInt());
+                    input.nextLine();
+                    break;
+                }
+                case 4: {
+                    break;
+                }
+                case 5: {
+                    System.out.println("Fin du jeu");
+                    System.exit(0);
+                    break;
+                }
+                default: {
+                    System.out.println("Choix non valide");
+                }
+            }
+        }
     }
 
     public void runGame() {
