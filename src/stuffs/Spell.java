@@ -1,19 +1,12 @@
+package stuffs;
 
-public class Spell {
-	private String name;
+public class Spell extends Stuff {
+
 	private int atqLevel;
 	
 	public Spell(String name, int atqLevel) {
-		this.name = name;
+		super(name);
 		this.atqLevel = atqLevel;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public int getAtqLevel() {
@@ -26,7 +19,6 @@ public class Spell {
 
 	@Override
 	public String toString() {
-		return "Weapon [name=" + name + ", atqLevel=" + atqLevel + "]";
+		return super.toString() + " atq : " + atqLevel;
 	}
-	
 }

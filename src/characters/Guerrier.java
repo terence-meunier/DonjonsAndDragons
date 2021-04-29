@@ -1,27 +1,22 @@
+package characters;
+
+import stuffs.Weapon;
 
 public class Guerrier extends Character {
-	private String name;
-	private int lifeLevel;
-	private int strongLevel;
 	private Weapon weapon;
 	private String shield;
 
-	private static int RandNum() {
-		Double j = 5 + Math.random()*5;
-		return j.intValue();
-	}
-	
 	public Guerrier() {
 		this(null);
 	}
 
 	public Guerrier(String name) {
-		this(name, RandNum(), RandNum());
+		this(name, 5, 5);
 	}
 
 	public Guerrier(String name, int lifeLevel, int strongLevel) {
 		super(name, lifeLevel, strongLevel);
-		this.weapon = new Weapon("Epee", 50);
+		this.weapon = null;
 		this.shield = "Ecu";
 	}
 
