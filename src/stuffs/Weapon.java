@@ -1,19 +1,11 @@
+package stuffs;
 
-public class Weapon {
-	private String name;
+public class Weapon extends Stuff {
 	private int atqLevel;
 	
 	public Weapon(String name, int atqLevel) {
-		this.name = name;
+		super(name);
 		this.atqLevel = atqLevel;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public int getAtqLevel() {
@@ -26,7 +18,6 @@ public class Weapon {
 
 	@Override
 	public String toString() {
-		return "Weapon [name=" + name + ", atqLevel=" + atqLevel + "]";
+		return super.toString() + " atq : " + atqLevel;
 	}
-	
 }
