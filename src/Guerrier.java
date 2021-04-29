@@ -1,62 +1,28 @@
 
-public class Guerrier {
+public class Guerrier extends Character {
 	private String name;
 	private int lifeLevel;
 	private int strongLevel;
 	private Weapon weapon;
 	private String shield;
-	
-	private int RandNum() {
+
+	private static int RandNum() {
 		Double j = 5 + Math.random()*5;
 		return j.intValue();
 	}
 	
 	public Guerrier() {
-		this.name = null;
-		this.lifeLevel = RandNum();
-		this.strongLevel = RandNum();
-		this.weapon = new Weapon("Epée", 50);
-		this.shield = "Ecu";
+		this(null);
 	}
-	
+
 	public Guerrier(String name) {
-		this.name = name;
-		this.lifeLevel = RandNum();
-		this.strongLevel = RandNum();
-		this.weapon = new Weapon("Epée", 50);
-		this.shield = "Ecu";
+		this(name, RandNum(), RandNum());
 	}
-	
+
 	public Guerrier(String name, int lifeLevel, int strongLevel) {
-		this.name = name;
-		this.lifeLevel = lifeLevel;
-		this.strongLevel = strongLevel;
-		this.weapon = new Weapon("Epée", 50);
+		super(name, lifeLevel, strongLevel);
+		this.weapon = new Weapon("Epee", 50);
 		this.shield = "Ecu";
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getLifeLevel() {
-		return lifeLevel;
-	}
-
-	public void setLifeLevel(int lifeLevel) {
-		this.lifeLevel = lifeLevel;
-	}
-
-	public int getStrongLevel() {
-		return strongLevel;
-	}
-
-	public void setStrongLevel(int strongLevel) {
-		this.strongLevel = strongLevel;
 	}
 
 	public Weapon getWeapon() {
@@ -75,15 +41,4 @@ public class Guerrier {
 		this.shield = shield;
 	}
 
-	@Override
-	public String toString() {
-		String output = "";
-		output += "Nom du guerrier : " + name + "\n";
-		output += "-----------------------\n";
-		output += "\n";
-		output += "niveau de vie : " + lifeLevel + "\n";
-		output += "niveau d'atttaque : " + strongLevel + "\n";
-		output += "-----------------------------------------\n";
-		return output;
-	}
 }
