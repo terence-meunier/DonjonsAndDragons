@@ -1,6 +1,7 @@
 # Ignore All . dir and files
 .*
 .*/
+*.iml
 
 # Compiled class file
 *.class
