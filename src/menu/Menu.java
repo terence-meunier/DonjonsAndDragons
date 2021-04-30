@@ -6,11 +6,10 @@ import characters.Character;
 import characters.Guerrier;
 import characters.Magicien;
 
-import game.Dice;
-import game.GameBoard;
-
 public class Menu {
-    private static Scanner input = new Scanner(System.in);
+    private Scanner input;
+
+    public Menu() { this.input = new Scanner(System.in); }
 
     public Character mainMenu(Character character) {
         int choice = 0;
@@ -171,22 +170,13 @@ public class Menu {
         }
     }
 
-    public void runGame(Character character, GameBoard gameBoard, Dice dice) {
-        while (character.getPosition() < 64 && character.getLifeLevel() > 0) {
-            System.out.println("Position de " + character.getName() + " : " + character.getPosition());
-            System.out.println("Lancé le Dé en appuyant sur Entrée");
-            input.nextLine();
-            int diceValue = dice.throwDice();
-            int newCharacterPosition = character.getPosition() + diceValue;
-            character.setPosition(newCharacterPosition);
-        }
-
-        if (character.getLifeLevel() < 0) {
-            System.out.println("Perdu le joueur est mort");
-        } else {
-            System.out.println("Bravo !!! Vous avez gagné");
-        }
-
-        System.out.println("Fin de partie");
+    public int endMenu(Character character) {
+        System.out.println("1. Refaire un partie avec " + character.getName());
+        System.out.println("2. Retour au menu principal");
+        System.out.println("3. Quitter le jeu");
+        System.out.println("Votre choix : ");
+        int choice = input.nextInt();
+        input.nextLine();
+        return choice;
     }
 }
