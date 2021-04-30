@@ -1,6 +1,7 @@
 package game;
 
 // Character
+
 import characters.Character;
 
 // Menu
@@ -12,6 +13,12 @@ import exceptions.CharacterOutOfGameBoardException;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Classe Game qui permet de créer un objet de type Game, pour pouvoir lancer une partie
+ *
+ * @author Térence MEUNIER
+ * @version 1.0
+ */
 public class Game {
 
     private Character character;
@@ -20,6 +27,15 @@ public class Game {
     private Menu menu;
     private Scanner input;
 
+    /**
+     * Constructer principal qui instancie les différents objets
+     *
+     * @see Character
+     * @see GameBoard
+     * @see Dice
+     * @see Menu
+     * @see Scanner
+     */
     public Game() {
         this.character = null;
         this.gameBoard = new GameBoard();
@@ -28,7 +44,14 @@ public class Game {
         this.input = new Scanner(System.in);
     }
 
-    public void launch() {
+    /**
+     * Lance le jeu avec le personnage Character sélectionne dans la classe Game
+     *
+     * @throws CharacterOutOfGameBoardException
+     * @see GameBoard
+     * @see Character
+     */
+    public void launch() throws CharacterOutOfGameBoardException {
 
         List<Object> board = gameBoard.getBoard();
 
@@ -53,17 +76,19 @@ public class Game {
         }
 
         // Levée d'une exception si le joueur à dépassé la case finale du plateau de jeu
-        try {
-            if (character.getPosition() == 64) {
-                System.out.println("Bravo !!! Vous avez gagné");
-            } else {
-                throw new CharacterOutOfGameBoardException();
-            }
-        } catch (CharacterOutOfGameBoardException e) {
-            e.printStackTrace();
+
+        if (character.getPosition() == 64) {
+            System.out.println("Bravo !!! Vous avez gagné");
+        } else {
+            throw new CharacterOutOfGameBoardException();
         }
     }
 
+    /**
+     * Lance le menu principal du jeu
+     *
+     * @see Menu
+     */
     public void runGame() {
 
         character = menu.mainMenu(character);
@@ -74,7 +99,11 @@ public class Game {
             switch (choice) {
                 case 1: {
                     character.setPosition(0);
-                    launch();
+                    try {
+                        launch();
+                    } catch (CharacterOutOfGameBoardException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 }
                 case 2: {
