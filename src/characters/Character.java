@@ -52,11 +52,7 @@ abstract public class Character {
         this.strongLevel = strongLevel;
     }
 
-    public int move(int cases) {
-        return 1;
-    }
+    // abstract public int move(int throwDice);
 
-    public void fight(Character character) {
-        System.out.println(this.name + " attaque " + character.getName());
-    }
+    // abstract public void fight(Character character);
 }

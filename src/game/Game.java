@@ -1,9 +1,13 @@
 package game;
 
+// Character
 import characters.Character;
-import characters.Ennemy;
+
+// Menu
 import menu.Menu;
-import stuffs.Stuff;
+
+// Exceptions
+import exceptions.CharacterOutOfGameBoardException;
 
 import java.util.List;
 import java.util.Scanner;
@@ -45,10 +49,19 @@ public class Game {
 
             System.out.println("Lancé le Dé en appuyant sur Entrée");
             input.nextLine();
-            character.setPosition(character.getPosition() + 1);
+            character.setPosition(character.getPosition() + dice.throwDice());
         }
 
-        System.out.println("Bravo !!! Vous avez gagné");
+        // Levée d'une exception si le joueur à dépassé la case finale du plateau de jeu
+        try {
+            if (character.getPosition() == 64) {
+                System.out.println("Bravo !!! Vous avez gagné");
+            } else {
+                throw new CharacterOutOfGameBoardException();
+            }
+        } catch (CharacterOutOfGameBoardException e) {
+            e.printStackTrace();
+        }
     }
 
     public void runGame() {
