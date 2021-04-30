@@ -4,7 +4,7 @@ import stuffs.Spell;
 
 /**
  *
- * Classe Magicien qui permet de créer un objet de type Guerrier, hérite de la classe abstraite Character
+ * Classe Magicien qui permet de créer un objet de type Magicien, hérite de la classe abstraite Character
  *
  * @see Character
  *
