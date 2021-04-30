@@ -11,14 +11,8 @@ import game.GameBoard;
 
 public class Menu {
     private static Scanner input = new Scanner(System.in);
-    private Character character;
-    private GameBoard gameBoard;
 
-    public Menu() {
-        this.character = null;
-    }
-
-    public Character mainMenu() {
+    public Character mainMenu(Character character) {
         int choice = 0;
 
         while (choice != 4) {
@@ -59,7 +53,7 @@ public class Menu {
                     if (character == null) {
                         System.out.println("Vous n'avez pas encore créé de personnage");
                     } else {
-                        this.subMenuCharacter();
+                        this.subMenuCharacter(character);
                     }
                     break;
                 }
@@ -87,7 +81,7 @@ public class Menu {
         return character;
     }
 
-    public void subMenuCharacter() {
+    public void subMenuCharacter(Character character) {
         int choice = 0;
 
         while (choice != 3) {
@@ -109,7 +103,7 @@ public class Menu {
                     break;
                 }
                 case 2: {
-                    this.setStatsCharacter();
+                    this.setStatsCharacter(character);
                     break;
                 }
                 case 3: {
@@ -127,7 +121,7 @@ public class Menu {
         }
     }
 
-    public void setStatsCharacter() {
+    public void setStatsCharacter(Character character) {
         int choice = 0;
 
         while (choice != 4) {
@@ -177,16 +171,11 @@ public class Menu {
         }
     }
 
-    public void playMenu() {
-        System.out.println("Lancé le Dé en appuyant sur Entrée");
-        input.nextLine();
-    }
-
     public void runGame(Character character, GameBoard gameBoard, Dice dice) {
-        this.character = character;
-        this.gameBoard = gameBoard;
         while (character.getPosition() < 64 && character.getLifeLevel() > 0) {
-            this.playMenu();
+            System.out.println("Position de " + character.getName() + " : " + character.getPosition());
+            System.out.println("Lancé le Dé en appuyant sur Entrée");
+            input.nextLine();
             int diceValue = dice.throwDice();
             int newCharacterPosition = character.getPosition() + diceValue;
             character.setPosition(newCharacterPosition);
