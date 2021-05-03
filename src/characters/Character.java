@@ -1,5 +1,8 @@
 package characters;
 
+import game.Slot;
+import stuffs.Stuff;
+
 /**
  *
  * Classe abstraite Character qui permet de créer des classes
@@ -132,6 +135,8 @@ abstract public class Character {
     }
 
     abstract public void move(int throwDice);
+
+    abstract public void drop(Slot slot);
 
     // abstract public void fight(Character character);
 }

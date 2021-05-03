@@ -1,5 +1,8 @@
 package characters;
 
+import game.Slot;
+import stuffs.Stuff;
+
 /**
  *
  * Classe Ennemy qui permet de créer un objet de type Ennemy, hérite de la classe abstraite Character
@@ -25,5 +28,11 @@ public class Ennemy extends Character {
 
     public void move(int throwDice) {
 
+    }
+
+    public void drop(Slot slot) {
+        if (slot.getClass() == game.Slot.class) {
+            System.out.println(slot);
+        }
     }
 }

@@ -1,5 +1,8 @@
 package characters;
 
+import game.Slot;
+import stuffs.Potion;
+import stuffs.Stuff;
 import stuffs.Weapon;
 
 /**
@@ -97,6 +100,12 @@ public class Guerrier extends Character {
 		this.position += throwDice;
 		if (this.position > 64) {
 			this.position = 64 - out;
+		}
+	}
+
+	public void drop(Slot slot) {
+		if (slot.getClass() == game.Slot.class) {
+			System.out.println(slot);
 		}
 	}
 

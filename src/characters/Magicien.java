@@ -1,6 +1,8 @@
 package characters;
 
+import game.Slot;
 import stuffs.Spell;
+import stuffs.Stuff;
 
 /**
  *
@@ -93,6 +95,12 @@ public class Magicien extends Character {
 		this.position += throwDice;
 		if (this.position > 64) {
 			this.position = 64 - out;
+		}
+	}
+
+	public void drop(Slot slot) {
+		if (slot.getClass() == game.Slot.class) {
+			System.out.println(slot);
 		}
 	}
 
