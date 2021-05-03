@@ -45,7 +45,7 @@ abstract public class Character {
         output += "-----------------------\n";
         output += "\n";
         output += "niveau de vie : " + lifeLevel + "\n";
-        output += "niveau d'atttaque : " + strongLevel + "\n";
+        output += "niveau d'attaque : " + strongLevel + "\n";
         output += "-----------------------------------------\n";
         return output;
     }
@@ -136,7 +136,22 @@ abstract public class Character {
 
     abstract public void move(int throwDice);
 
-    abstract public void drop(Slot slot);
-
-    // abstract public void fight(Character character);
+    public void drop(Slot slot) {
+        if (slot.isPotion()) {
+            // Si le slot contient une potion
+            System.out.println("Santé actuel de " + name + " : " + lifeLevel + " points de vie");
+            if (lifeLevel < 10) {
+                lifeLevel += slot.getPotion().getLifePoints();
+                System.out.println(slot.getPotion().getName());
+                System.out.println("+ " + slot.getPotion().getLifePoints() + " pts de vie");
+                if (lifeLevel > 10) {
+                    System.out.println("Votre santé est pleine");
+                    lifeLevel = 10;
+                }
+            } else {
+                System.out.println("Vous venez de trouver une potion, mais votre santé est déjà pleine");
+            }
+            System.out.println("Santé actuel de " + name + " : " + lifeLevel + " points de vie");
+        }
+    }
 }
