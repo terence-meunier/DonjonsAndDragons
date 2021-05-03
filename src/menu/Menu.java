@@ -42,7 +42,7 @@ public class Menu {
                     break;
                 }
                 case 2: {
-                    System.out.println("Indiquer le nom du guerrier :");
+                    System.out.println("Indiquer le nom du magicien :");
                     String name = input.nextLine();
                     character = new Magicien(name);
                     System.out.println(character.getName() + " a bien été créé");

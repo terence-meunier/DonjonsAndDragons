@@ -5,10 +5,12 @@ package game;
 import characters.Character;
 
 // Menu
+import characters.Ennemy;
 import menu.Menu;
 
 // Exceptions
 import exceptions.CharacterOutOfGameBoardException;
+import stuffs.Potion;
 import stuffs.Stuff;
 
 import java.util.List;
@@ -58,25 +60,24 @@ public class Game {
 
         while (character.getPosition() < 64) {
             System.out.println("Position de " + character.getName() + " : " + character.getPosition());
-            if (board.get(character.getPosition()).isStuff()) {
-                // Drop item
-                character.drop(board.get(character.getPosition()));
-            } else if (board.get(character.getPosition()).isEnnemy()) {
-                // Fight
-                // character.fight(character.get(character.getPosition()));
-            } else {
+            if (board.get(character.getPosition()) == null) {
                 // Case vide
                 System.out.println("Case vide");
+            } else if (board.get(character.getPosition()) instanceof Ennemy) {
+                // Fight
+                System.out.println("BASSSSSTTTTOOOOOOONNNNNN!!!!!!");
+            } else {
+                // Drop item
+                character.drop(board.get(character.getPosition()));
             }
             System.out.println("Lancé le Dé en appuyant sur Entrée");
             input.nextLine();
-            character.move(dice.throwDice());
+            character.move(1);
         }
 
         // Levée d'une exception si le joueur à dépassé la case finale du plateau de jeu
 
         if (character.getPosition() == 64) {
-            System.out.println(character);
             System.out.println("Bravo !!! Vous avez gagné");
         } else {
             throw new CharacterOutOfGameBoardException();
