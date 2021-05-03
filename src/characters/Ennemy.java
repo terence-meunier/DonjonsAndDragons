@@ -30,9 +30,4 @@ public class Ennemy extends Character {
 
     }
 
-    public void drop(Slot slot) {
-        if (slot.getClass() == game.Slot.class) {
-            System.out.println(slot);
-        }
-    }
 }
