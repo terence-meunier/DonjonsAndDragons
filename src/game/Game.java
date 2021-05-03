@@ -58,27 +58,33 @@ public class Game {
 
         List<Slot> board = gameBoard.getBoard();
 
-        while (character.getPosition() < 64) {
+        while (character.getPosition() < 64 && character.getLifeLevel() > 0) {
+            System.out.println("Lancé le Dé en appuyant sur Entrée");
+            input.nextLine();
+            character.move(1);
             System.out.println("Position de " + character.getName() + " : " + character.getPosition());
+
             if (board.get(character.getPosition()) == null) {
                 // Case vide
                 System.out.println("Case vide");
             } else if (board.get(character.getPosition()) instanceof Ennemy) {
                 // Fight
                 System.out.println("BASSSSSTTTTOOOOOOONNNNNN!!!!!!");
+                character.fight((Ennemy) board.get(character.getPosition()));
             } else {
                 // Drop item
                 character.drop(board.get(character.getPosition()));
             }
-            System.out.println("Lancé le Dé en appuyant sur Entrée");
-            input.nextLine();
-            character.move(1);
         }
 
         // Levée d'une exception si le joueur à dépassé la case finale du plateau de jeu
 
         if (character.getPosition() == 64) {
-            System.out.println("Bravo !!! Vous avez gagné");
+            if (character.getLifeLevel() <= 0) {
+                System.out.println("Vous avez perdu!");
+            } else {
+                System.out.println("Bravo !!! Vous avez gagné");
+            }
         } else {
             throw new CharacterOutOfGameBoardException();
         }

@@ -1,9 +1,7 @@
 package characters;
 
 import game.Slot;
-import stuffs.Potion;
 import stuffs.Spell;
-import stuffs.Stuff;
 import stuffs.Weapon;
 
 import java.util.Scanner;
@@ -108,13 +106,57 @@ public class Guerrier extends Character {
         super.drop(slot);
 
         if (slot instanceof Weapon) {
-            System.out.println("Arme actuel de " + name + " : " + weapon);
-            System.out.println("Récupération de : " + slot);
-            weapon = (Weapon) slot;
-            System.out.println("Nouvel arme actuel de " + name + " : " + weapon);
+            if (weapon == null) {
+                System.out.println("Vous avec trouvé une arme : " + slot);
+                weapon = (Weapon) slot;
+            } else {
+                Scanner input = new Scanner(System.in);
+                int choice = 0;
+                while (choice != 1 && choice != 2) {
+                    System.out.println("Arme trouvé : " + slot);
+                    System.out.println("Arme actuel : " + weapon);
+                    System.out.println("Changer d'arme (1: Oui / 2: Non) ?");
+                    choice = input.nextInt();
+                    input.nextLine();
+
+                    switch (choice) {
+                        case 1: {
+                            System.out.println("Changement d'arme");
+                            weapon = (Weapon) slot;
+                            break;
+                        }
+                        case 2: {
+                            System.out.println("Arme actuel conservé");
+                            break;
+                        }
+                        default: {
+                            System.out.println("Choix non valide");
+                        }
+                    }
+                }
+            }
         } else if (slot instanceof Spell) {
             System.out.println("Les sorts ne sont pas faits pour les guerriers, passez votre chemin!");
         }
     }
 
+    public void fight(Ennemy ennemy) {
+        while (ennemy.getLifeLevel() > 0 && lifeLevel > 0) {
+             lifeLevel -= ennemy.getStrongLevel();
+            int forceWarrior;
+            if (weapon == null) {
+                forceWarrior = strongLevel;
+            } else {
+                forceWarrior = strongLevel + weapon.getAtqLevel();
+            }
+            ennemy.setLifeLevel(ennemy.getLifeLevel() - forceWarrior);
+        }
+
+        if (ennemy.getLifeLevel() <= 0 && lifeLevel > 0) {
+            System.out.println("Vous avez gagné");
+        } else if (lifeLevel <= 0) {
+            System.out.println("Vous êtes mort");
+            position = 64;
+        }
+    }
 }

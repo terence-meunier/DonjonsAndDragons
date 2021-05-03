@@ -155,4 +155,6 @@ abstract public class Character extends Slot {
             System.out.println("Santé actuel de " + name + " : " + lifeLevel + " points de vie");
         }
     }
+
+    abstract public void fight(Ennemy ennemy);
 }

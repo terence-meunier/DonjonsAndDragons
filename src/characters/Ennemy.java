@@ -30,4 +30,8 @@ public class Ennemy extends Character {
 
     }
 
+    public void fight(Ennemy ennemy) {
+
+    }
+
 }
