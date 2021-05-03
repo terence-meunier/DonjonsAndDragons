@@ -63,4 +63,24 @@ public class Slot {
             return "Case vide";
         }
     }
+
+    public boolean isEnnemy() {
+        return (ennemy != null);
+    }
+
+    public boolean isStuff() {
+        return (weapon != null) || (spell != null) || (potion != null);
+    }
+
+    public boolean isWeapon() {
+        return (weapon != null);
+    }
+
+    public boolean isSpell() {
+        return (spell != null);
+    }
+
+    public boolean isPotion() {
+        return (potion != null);
+    }
 }
