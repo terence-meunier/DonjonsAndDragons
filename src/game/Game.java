@@ -9,6 +9,7 @@ import menu.Menu;
 
 // Exceptions
 import exceptions.CharacterOutOfGameBoardException;
+import stuffs.Stuff;
 
 import java.util.List;
 import java.util.Scanner;
@@ -53,23 +54,11 @@ public class Game {
      */
     public void launch() throws CharacterOutOfGameBoardException {
 
-        List<Object> board = gameBoard.getBoard();
+        List<Slot> board = gameBoard.getBoard();
 
         while (character.getPosition() < 64) {
             System.out.println("Position de " + character.getName() + " : " + character.getPosition());
-
-            if (board.get(character.getPosition()) == null) {
-                System.out.println("Case vide à cette position");
-            } else if (board.get(character.getPosition()).getClass() == stuffs.Potion.class) {
-                System.out.println("C'est du sutffs");
-            } else if (board.get(character.getPosition()).getClass() == characters.Ennemy.class) {
-                System.out.println("C'est un ennemie");
-            } else if (board.get(character.getPosition()).getClass() == stuffs.Weapon.class) {
-                System.out.println("C'est une arme");
-            } else if (board.get(character.getPosition()).getClass() == stuffs.Spell.class) {
-                System.out.println("C'est un sort");
-            }
-
+            System.out.println(board.get(character.getPosition()));
             System.out.println("Lancé le Dé en appuyant sur Entrée");
             input.nextLine();
             character.move(dice.throwDice());
