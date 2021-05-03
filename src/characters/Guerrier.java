@@ -92,4 +92,12 @@ public class Guerrier extends Character {
 		this.shield = shield;
 	}
 
+	public void move(int throwDice) {
+		int out = throwDice - (64 - this.position);
+		this.position += throwDice;
+		if (this.position > 64) {
+			this.position = 64 - out;
+		}
+	}
+
 }

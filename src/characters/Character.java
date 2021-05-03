@@ -12,10 +12,10 @@ package characters;
  */
 abstract public class Character {
 
-    private String name;
-    private int lifeLevel;
-    private int strongLevel;
-    private int position;
+    protected String name;
+    protected int lifeLevel;
+    protected int strongLevel;
+    protected int position;
 
     /**
      *
@@ -131,7 +131,7 @@ abstract public class Character {
         this.strongLevel = strongLevel;
     }
 
-    // abstract public int move(int throwDice);
+    abstract public void move(int throwDice);
 
     // abstract public void fight(Character character);
 }

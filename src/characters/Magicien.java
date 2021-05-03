@@ -88,4 +88,12 @@ public class Magicien extends Character {
 		this.filter = filter;
 	}
 
+	public void move(int throwDice) {
+		int out = throwDice - (64 - this.position);
+		this.position += throwDice;
+		if (this.position > 64) {
+			this.position = 64 - out;
+		}
+	}
+
 }

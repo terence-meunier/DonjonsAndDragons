@@ -72,7 +72,7 @@ public class Game {
 
             System.out.println("Lancé le Dé en appuyant sur Entrée");
             input.nextLine();
-            character.setPosition(character.getPosition() + dice.throwDice());
+            character.move(dice.throwDice());
         }
 
         // Levée d'une exception si le joueur à dépassé la case finale du plateau de jeu
