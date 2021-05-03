@@ -58,7 +58,16 @@ public class Game {
 
         while (character.getPosition() < 64) {
             System.out.println("Position de " + character.getName() + " : " + character.getPosition());
-            System.out.println(board.get(character.getPosition()));
+            if (board.get(character.getPosition()).isStuff()) {
+                // Drop item
+                character.drop(board.get(character.getPosition()));
+            } else if (board.get(character.getPosition()).isEnnemy()) {
+                // Fight
+                // character.fight(character.get(character.getPosition()));
+            } else {
+                // Case vide
+                System.out.println("Case vide");
+            }
             System.out.println("Lancé le Dé en appuyant sur Entrée");
             input.nextLine();
             character.move(dice.throwDice());
@@ -67,6 +76,7 @@ public class Game {
         // Levée d'une exception si le joueur à dépassé la case finale du plateau de jeu
 
         if (character.getPosition() == 64) {
+            System.out.println(character);
             System.out.println("Bravo !!! Vous avez gagné");
         } else {
             throw new CharacterOutOfGameBoardException();
