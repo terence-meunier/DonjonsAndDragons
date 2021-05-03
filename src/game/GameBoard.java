@@ -67,13 +67,13 @@ public class GameBoard {
             } else if (i == 45 || i == 6 || i == 34) {
                 board.add(bigPotion);
             } else if (i == 55 || i == 63) {
-                board.add(sorcier);
-            } else if (i == 5 || i == 33 || i == 17 || i == 8) {
-                board.add(gobelin);
-            } else if (i == 11 || i == 2 || i == 7) {
-                board.add(dragon);
-            } else if (i == 10) {
                 board.add(epee);
+            } else if (i == 5 || i == 33 || i == 17 || i == 8) {
+                board.add(epee);
+            } else if (i == 11 || i == 2 || i == 7) {
+                board.add(epee);
+            } else if (i == 10) {
+                board.add(massue);
             } else if (i == 38) {
                 board.add(eclair);
             } else if (i == 24) {
