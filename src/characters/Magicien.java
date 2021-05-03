@@ -141,6 +141,22 @@ public class Magicien extends Character {
     }
 
     public void fight(Ennemy ennemy) {
+        while (ennemy.getLifeLevel() > 0 && lifeLevel > 0) {
+            lifeLevel -= ennemy.getStrongLevel();
+            int forceWarrior;
+            if (spell == null) {
+                forceWarrior = strongLevel;
+            } else {
+                forceWarrior = strongLevel + spell.getAtqLevel();
+            }
+            ennemy.setLifeLevel(ennemy.getLifeLevel() - forceWarrior);
+        }
 
+        if (ennemy.getLifeLevel() <= 0 && lifeLevel > 0) {
+            System.out.println("Vous avez gagné");
+        } else if (lifeLevel <= 0) {
+            System.out.println("Vous êtes mort");
+            position = 64;
+        }
     }
 }
