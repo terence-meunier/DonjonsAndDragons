@@ -4,6 +4,8 @@ import game.Slot;
 import stuffs.Spell;
 import stuffs.Stuff;
 
+import java.util.Scanner;
+
 /**
  *
  * Classe Magicien qui permet de créer un objet de type Magicien, hérite de la classe abstraite Character
@@ -90,6 +92,10 @@ public class Magicien extends Character {
 		this.filter = filter;
 	}
 
+	public String toString() {
+		return super.toString() + "\n---- EQUIPEMENTS -----\nArme : " + spell + "\nBouclier : " + filter;
+	}
+
 	public void move(int throwDice) {
 		int out = throwDice - (64 - this.position);
 		this.position += throwDice;
@@ -99,8 +105,41 @@ public class Magicien extends Character {
 	}
 
 	public void drop(Slot slot) {
-		if (slot.getClass() == game.Slot.class) {
-			System.out.println(slot);
+		super.drop(slot);
+		if (slot.isSpell()) {
+			// Si le slot contien une arme
+			if (spell == null) {
+				spell = slot.getSpell();
+				strongLevel += spell.getAtqLevel();
+				System.out.println("Sort suivant trouvé : " + slot.getSpell());
+			} else {
+				Scanner input = new Scanner(System.in);
+				int choice = 0;
+
+				System.out.println("Sort actuel : " + spell);
+				System.out.println("Souhaitez vous changer pour " + slot.getSpell() +" (1: Oui /2: Non) :");
+
+				while ((choice != 1) && (choice != 2)) {
+					choice = input.nextInt();
+					input.nextLine();
+					switch (choice) {
+						case 1: {
+							spell = slot.getSpell();
+							strongLevel += spell.getAtqLevel();
+							System.out.println("Novueau sort affecté : " + spell);
+							break;
+						}
+						case 2: {
+							System.out.println("Pas de changement de sort");
+							System.out.println("Sort actuel : " + spell);
+							break;
+						}
+						default: {
+							System.out.println("Choix invalide pour changer de sort");
+						}
+					}
+				}
+			}
 		}
 	}
 
