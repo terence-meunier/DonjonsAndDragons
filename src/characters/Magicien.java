@@ -3,6 +3,7 @@ package characters;
 import game.Slot;
 import stuffs.Spell;
 import stuffs.Stuff;
+import stuffs.Weapon;
 
 import java.util.Scanner;
 
@@ -106,41 +107,16 @@ public class Magicien extends Character {
 
 	public void drop(Slot slot) {
 		super.drop(slot);
-		if (slot.isSpell()) {
-			// Si le slot contien une arme
-			if (spell == null) {
-				spell = slot.getSpell();
-				strongLevel += spell.getAtqLevel();
-				System.out.println("Sort suivant trouvé : " + slot.getSpell());
-			} else {
-				Scanner input = new Scanner(System.in);
-				int choice = 0;
 
-				System.out.println("Sort actuel : " + spell);
-				System.out.println("Souhaitez vous changer pour " + slot.getSpell() +" (1: Oui /2: Non) :");
-
-				while ((choice != 1) && (choice != 2)) {
-					choice = input.nextInt();
-					input.nextLine();
-					switch (choice) {
-						case 1: {
-							spell = slot.getSpell();
-							strongLevel += spell.getAtqLevel();
-							System.out.println("Novueau sort affecté : " + spell);
-							break;
-						}
-						case 2: {
-							System.out.println("Pas de changement de sort");
-							System.out.println("Sort actuel : " + spell);
-							break;
-						}
-						default: {
-							System.out.println("Choix invalide pour changer de sort");
-						}
-					}
-				}
-			}
+		if (slot instanceof Spell) {
+			System.out.println("Arme actuel de " + name + " : " + spell);
+			System.out.println("Récupération de : " + slot);
+			spell = (Spell) slot;
+			System.out.println("Nouvel arme actuel de " + name + " : " + spell);
+		} else if (slot instanceof Weapon) {
+			System.out.println("Les armes ne sont pas faites pour les magiciens, passez votre chemin !");
 		}
+
 	}
 
 }

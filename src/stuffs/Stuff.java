@@ -1,6 +1,8 @@
 package stuffs;
 
-abstract public class Stuff {
+import game.Slot;
+
+abstract public class Stuff extends Slot {
     private String name;
 
     public Stuff(String name) {

@@ -2,6 +2,7 @@ package characters;
 
 import game.Slot;
 import stuffs.Potion;
+import stuffs.Spell;
 import stuffs.Stuff;
 import stuffs.Weapon;
 
@@ -105,40 +106,14 @@ public class Guerrier extends Character {
 
     public void drop(Slot slot) {
         super.drop(slot);
-        if (slot.isWeapon()) {
-            // Si le slot contien une arme
-            if (weapon == null) {
-                weapon = slot.getWeapon();
-                strongLevel += weapon.getAtqLevel();
-                System.out.println("Arme suivante trouvée : " + slot.getWeapon());
-            } else {
-                Scanner input = new Scanner(System.in);
-                int choice = 0;
 
-                System.out.println("Arme actuel : " + weapon);
-                System.out.println("Souhaitez vous changer pour " + slot.getWeapon() +" (1: Oui /2: Non) :");
-
-                while ((choice != 1) && (choice != 2)) {
-                    choice = input.nextInt();
-                    input.nextLine();
-                    switch (choice) {
-                        case 1: {
-                            weapon = slot.getWeapon();
-                            strongLevel += weapon.getAtqLevel();
-                            System.out.println("Nouvel arme affecté : " + weapon);
-                            break;
-                        }
-                        case 2: {
-                            System.out.println("Pas de changement d'arme");
-                            System.out.println("Arme actuel : " + weapon);
-                            break;
-                        }
-                        default: {
-                            System.out.println("Choix invalide pour changer d'arme");
-                        }
-                    }
-                }
-            }
+        if (slot instanceof Weapon) {
+            System.out.println("Arme actuel de " + name + " : " + weapon);
+            System.out.println("Récupération de : " + slot);
+            weapon = (Weapon) slot;
+            System.out.println("Nouvel arme actuel de " + name + " : " + weapon);
+        } else if (slot instanceof Spell) {
+            System.out.println("Les sorts ne sont pas faits pour les guerriers, passez votre chemin!");
         }
     }
 

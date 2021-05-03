@@ -1,6 +1,7 @@
 package characters;
 
 import game.Slot;
+import stuffs.Potion;
 import stuffs.Stuff;
 
 /**
@@ -13,7 +14,7 @@ import stuffs.Stuff;
  * @author Térence MEUNIER
  * @version 1.0
  */
-abstract public class Character {
+abstract public class Character extends Slot {
 
     protected String name;
     protected int lifeLevel;
@@ -137,13 +138,13 @@ abstract public class Character {
     abstract public void move(int throwDice);
 
     public void drop(Slot slot) {
-        if (slot.isPotion()) {
+        if (slot instanceof Potion) {
             // Si le slot contient une potion
             System.out.println("Santé actuel de " + name + " : " + lifeLevel + " points de vie");
             if (lifeLevel < 10) {
-                lifeLevel += slot.getPotion().getLifePoints();
-                System.out.println(slot.getPotion().getName());
-                System.out.println("+ " + slot.getPotion().getLifePoints() + " pts de vie");
+                lifeLevel += ((Potion) slot).getLifePoints();
+                System.out.println(((Potion) slot).getName());
+                System.out.println("+ " + ((Potion) slot).getLifePoints() + " pts de vie");
                 if (lifeLevel > 10) {
                     System.out.println("Votre santé est pleine");
                     lifeLevel = 10;
