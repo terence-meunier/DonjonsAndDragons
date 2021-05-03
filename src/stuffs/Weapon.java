@@ -18,6 +18,6 @@ public class Weapon extends Stuff {
 
 	@Override
 	public String toString() {
-		return super.toString() + " atq : " + atqLevel;
+		return super.toString() + " (atq : " + atqLevel + ")";
 	}
 }
