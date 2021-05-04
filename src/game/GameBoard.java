@@ -6,6 +6,7 @@ import stuffs.Spell;
 import stuffs.Weapon;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GameBoard {
@@ -21,7 +22,7 @@ public class GameBoard {
 
     private void generateGameBoard() {
 
-        // Load in the List
+        // Hard Load
         for (int i = 0; i < this.nbCases; i++) {
             if (i == 45 || i == 52 || i == 56 || i == 62) {
                 board.add(new Ennemy("Dragon", 15, 4));
@@ -45,6 +46,9 @@ public class GameBoard {
                 board.add(null);
             }
         }
+
+        // Random Load
+        Collections.shuffle(board);
     }
 
     public List<Slot> getBoard() {
