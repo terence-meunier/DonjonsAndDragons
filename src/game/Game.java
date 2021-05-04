@@ -45,6 +45,24 @@ public class Game {
     }
 
     /**
+     * Tell a question for int between minRange and maxRange
+     * @param question
+     * @param minRange
+     * @param maxRange
+     * @return
+     */
+    public int tellAnyQuestionsInt(String question, int minRange, int maxRange) {
+        System.out.println(question);
+        int answer = input.nextInt();
+        input.nextLine();
+        if (answer >= minRange && answer <= maxRange) {
+            return answer;
+        }
+        System.out.println("Le choix doit être entre compris entre " + minRange + " et " + maxRange);
+        return tellAnyQuestionsInt(question, minRange, maxRange);
+    }
+
+    /**
      * throwDice just stop the program and wait user action
      */
     public void throwDice() {
@@ -56,7 +74,10 @@ public class Game {
      * method fight for fight action between character and ennemies
      */
     public void fight() {
-        // Le personnage frappe l'ennemie
+        // ennemy info
+        System.out.println("Vous attaquez : " + gameBoard.getBoard().get(character.getPosition()));
+
+        // Player Fight ennemy
         character.fight((Ennemy) gameBoard.getBoard().get(character.getPosition()));
 
         // On regarde le résultat de la frappe du joueur sur l'ennemie
@@ -70,17 +91,38 @@ public class Game {
             System.out.println("L'ennemie à survécu a votre attaque.");
             System.out.println("Il vous s'inflige " + ((Ennemy) gameBoard.getBoard().get(character.getPosition())).getStrongLevel() + " pts de dégats");
             character.takeDamages(((Ennemy) gameBoard.getBoard().get(character.getPosition())).getStrongLevel());
-            // Et il s'enfuit
-            System.out.println("Et il s'enfuit !!!");
-        }
 
-        // On teste si le personnage est vaincue
-        if (character.getLifeLevel() <= 0) {
-            System.out.println("Vous êtes mort!!!");
-            character.setPosition(63);
-        } else {
-            System.out.println("Vous resortez de ce combat avec " + character.getLifeLevel() + " pts de vie");
+            // On teste si le personnage est vaincue
+            if (character.getLifeLevel() <= 0) {
+                System.out.println("Vous êtes mort!!!");
+                character.setPosition(63);
+            } else {
+                System.out.println("Vous resortez de ce combat avec " + character.getLifeLevel() + " pts de vie");
+                int choice = tellAnyQuestionsInt("Voulez vous continuez (1: Oui / 2: Non) : ", 1, 2);
+                switch (choice) {
+                    case 1: {
+                        fight();
+                        break;
+                    }
+                    case 2: {
+                        returnBack();
+                        break;
+                    }
+                }
+            }
         }
+    }
+
+    /**
+     * Return back position of between 1 to 6 cases
+     */
+    public void returnBack() {
+        int nbCases = dice.throwDice();
+        character.move(-nbCases);
+        if (character.getPosition() < 0) {
+            character.setPosition(0);
+        }
+        System.out.println(character.getName() + " retourne à la case : " + character.getPosition());
     }
 
     /**
@@ -94,7 +136,6 @@ public class Game {
         } else if (gameBoard.getBoard().get(character.getPosition()) instanceof Ennemy) {
             // Case ennemie, on lance un combat
             System.out.println("BASSSSSTTTTOOOOOOONNNNNN!!!!!!");
-            System.out.println("Vous attaquez : " + gameBoard.getBoard().get(character.getPosition()));
             fight();
         } else {
             // Case bonus, on récupère le bonus
