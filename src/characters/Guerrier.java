@@ -13,7 +13,7 @@ import java.util.Scanner;
  * @version 1.0
  * @see Character
  */
-public class Guerrier extends Character {
+public class Guerrier extends Character implements Player {
     private Weapon weapon;
     private String shield;
 

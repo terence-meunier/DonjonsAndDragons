@@ -13,7 +13,7 @@ import java.util.Scanner;
  * @version 1.0
  * @see Character
  */
-public class Magicien extends Character {
+public class Magicien extends Character implements Player {
     private Spell spell;
     private String filter;
 
