@@ -11,6 +11,22 @@ public class Menu {
 
     public Menu() { this.input = new Scanner(System.in); }
 
+    public String tellAnyQuestions(String question) {
+        System.out.println(question);
+        return input.nextLine();
+    }
+
+    public int tellAnyQuestionsInt(String question, int minRange, int maxRange) {
+        System.out.println(question);
+        int answer = input.nextInt();
+        input.nextLine();
+        if (answer >= minRange && answer <= maxRange) {
+            return answer;
+        }
+        System.out.println("Le choix doit être entre compris entre " + minRange + " et " + maxRange);
+        return tellAnyQuestionsInt(question, minRange, maxRange);
+    }
+
     public Character mainMenu(Character character) {
         int choice = 0;
 
@@ -30,20 +46,17 @@ public class Menu {
             System.out.println("4. Lancer le jeu");
             System.out.println("5. Quitter le jeu");
 
-            choice = input.nextInt();
-            input.nextLine();
+            choice = tellAnyQuestionsInt("Votre choix :", 1, 5);
 
             switch (choice) {
                 case 1: {
-                    System.out.println("Indiquer le nom du guerrier :");
-                    String name = input.nextLine();
+                    String name = tellAnyQuestions("Indiquer le nom du guerrier :");
                     character = new Guerrier(name);
                     System.out.println(character.getName() + " a bien été créé");
                     break;
                 }
                 case 2: {
-                    System.out.println("Indiquer le nom du magicien :");
-                    String name = input.nextLine();
+                    String name = tellAnyQuestions("Indiquer le nom du magicien :");
                     character = new Magicien(name);
                     System.out.println(character.getName() + " a bien été créé");
                     break;
@@ -93,8 +106,7 @@ public class Menu {
             System.out.println("3. Retour menu principal");
             System.out.println("4. Quitter le jeu");
 
-            choice = input.nextInt();
-            input.nextLine();
+            choice = tellAnyQuestionsInt("Votre choix :", 1, 4);
 
             switch (choice) {
                 case 1: {
@@ -134,8 +146,7 @@ public class Menu {
             System.out.println("4. Retour");
             System.out.println("5. Quitter le jeu");
 
-            choice = input.nextInt();
-            input.nextLine();
+            choice = tellAnyQuestionsInt("Votre choix :", 1, 5);
 
             switch (choice) {
                 case 1: {
@@ -174,9 +185,7 @@ public class Menu {
         System.out.println("1. Refaire un partie avec " + character.getName());
         System.out.println("2. Retour au menu principal");
         System.out.println("3. Quitter le jeu");
-        System.out.println("Votre choix : ");
-        int choice = input.nextInt();
-        input.nextLine();
+        int choice = tellAnyQuestionsInt("Votre choix :", 1, 3);
         return choice;
     }
 }
