@@ -26,12 +26,8 @@ public class Ennemy extends Character {
         super(name, lifeLevel, atqLevel);
     }
 
-    public void move(int throwDice) {
-
-    }
-
-    public void fight(Ennemy ennemy) {
-
+    public void takeDamages(int damages) {
+        lifeLevel -= damages;
     }
 
 }

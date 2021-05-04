@@ -2,7 +2,6 @@ package characters;
 
 import game.Slot;
 import stuffs.Spell;
-import stuffs.Stuff;
 import stuffs.Weapon;
 
 import java.util.Scanner;
@@ -93,14 +92,6 @@ public class Magicien extends Character {
         return super.toString() + "\n---- EQUIPEMENTS -----\nArme : " + spell + "\nBouclier : " + filter;
     }
 
-    public void move(int throwDice) {
-        int out = throwDice - (64 - this.position);
-        this.position += throwDice;
-        if (this.position > 64) {
-            this.position = 64 - out;
-        }
-    }
-
     public void drop(Slot slot) {
         super.drop(slot);
 
@@ -141,22 +132,18 @@ public class Magicien extends Character {
     }
 
     public void fight(Ennemy ennemy) {
-        while (ennemy.getLifeLevel() > 0 && lifeLevel > 0) {
-            lifeLevel -= ennemy.getStrongLevel();
-            int forceWarrior;
-            if (spell == null) {
-                forceWarrior = strongLevel;
-            } else {
-                forceWarrior = strongLevel + spell.getAtqLevel();
-            }
-            ennemy.setLifeLevel(ennemy.getLifeLevel() - forceWarrior);
+        if (spell != null) {
+            ennemy.takeDamages(spell.getAtqLevel());
         }
+    }
 
-        if (ennemy.getLifeLevel() <= 0 && lifeLevel > 0) {
-            System.out.println("Vous avez gagné");
-        } else if (lifeLevel <= 0) {
-            System.out.println("Vous êtes mort");
-            position = 64;
-        }
+    public void takeDamages(int damages) {
+        lifeLevel -= damages;
+    }
+
+    public void reset() {
+        super.reset();
+        lifeLevel = 3;
+        spell = null;
     }
 }

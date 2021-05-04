@@ -6,6 +6,8 @@ import characters.Character;
 
 // Menu
 import characters.Ennemy;
+import characters.Guerrier;
+import characters.Magicien;
 import menu.Menu;
 
 // Exceptions
@@ -47,6 +49,11 @@ public class Game {
         this.input = new Scanner(System.in);
     }
 
+    public void throwDice() {
+        System.out.println("Lancé le Dé en appuyant sur Entrée");
+        input.nextLine();
+    }
+
     /**
      * Lance le jeu avec le personnage Character sélectionne dans la classe Game
      *
@@ -58,28 +65,60 @@ public class Game {
 
         List<Slot> board = gameBoard.getBoard();
 
-        while (character.getPosition() < 64 && character.getLifeLevel() > 0) {
-            System.out.println("Lancé le Dé en appuyant sur Entrée");
-            input.nextLine();
-            character.move(1);
+        while (character.getPosition() < 63) {
+            // On lance le Dé
+            throwDice();
+
+            // On déplace le personnage
+            character.move(dice.throwDice());
+
+            // On donne sa nouvelle position
             System.out.println("Position de " + character.getName() + " : " + character.getPosition());
 
+            // On teste la case sur laquelle est arrivée le personnage
             if (board.get(character.getPosition()) == null) {
                 // Case vide
                 System.out.println("Case vide");
             } else if (board.get(character.getPosition()) instanceof Ennemy) {
-                // Fight
+                // Case ennemie un combat se lance
                 System.out.println("BASSSSSTTTTOOOOOOONNNNNN!!!!!!");
+
+                // Donne le type d'ennemie
+                System.out.println("Vous attaquez : " + board.get(character.getPosition()));
+
+                // Le personnage frappe l'ennemie
                 character.fight((Ennemy) board.get(character.getPosition()));
+
+                // On regarde le résultat de la frappe du joueur sur l'ennemie
+                if (((Ennemy) board.get(character.getPosition())).getLifeLevel() <= 0) {
+                    // L'ennemie est vaincue
+                    System.out.println("L'ennemie est vaincue est disparé dans les abimes !!!");
+                    board.set(character.getPosition(), null);
+                } else {
+                    // L'ennemie à survécu
+                    // L'ennemie inflige des dégats au joueur
+                    System.out.println("L'ennemie à survécu a votre attaque.");
+                    System.out.println("Il vous s'inflige " + ((Ennemy) board.get(character.getPosition())).getStrongLevel() + " pts de dégats");
+                    character.takeDamages(((Ennemy) board.get(character.getPosition())).getStrongLevel());
+                    // Et il s'enfuit
+                    System.out.println("Et il s'enfuit !!!");
+                }
+
+                // On teste si le personnage est vaincue
+                if (character.getLifeLevel() <= 0) {
+                    System.out.println("Vous êtes mort!!!");
+                    character.setPosition(63);
+                } else {
+                    System.out.println("Vous resortez de ce combat avec " + character.getLifeLevel() + " pts de vie");
+                }
             } else {
-                // Drop item
+                // C'est une case bonus, on récupére le bonus
                 character.drop(board.get(character.getPosition()));
             }
         }
 
         // Levée d'une exception si le joueur à dépassé la case finale du plateau de jeu
-
-        if (character.getPosition() == 64) {
+        if (character.getPosition() == 63) {
             if (character.getLifeLevel() <= 0) {
                 System.out.println("Vous avez perdu!");
             } else {
@@ -104,7 +143,7 @@ public class Game {
         while (choice != 3) {
             switch (choice) {
                 case 1: {
-                    character.setPosition(0);
+                    character.reset();
                     try {
                         launch();
                     } catch (CharacterOutOfGameBoardException e) {

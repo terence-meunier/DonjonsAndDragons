@@ -135,7 +135,13 @@ abstract public class Character extends Slot {
         this.strongLevel = strongLevel;
     }
 
-    abstract public void move(int throwDice);
+    public void move(int throwDice) {
+        int out = throwDice - (63 - this.position);
+        this.position += throwDice;
+        if (this.position > 63) {
+            this.position = 63 - out;
+        }
+    }
 
     public void drop(Slot slot) {
         if (slot instanceof Potion) {
@@ -156,5 +162,13 @@ abstract public class Character extends Slot {
         }
     }
 
-    abstract public void fight(Ennemy ennemy);
+    public void fight(Ennemy ennemy) {
+        ennemy.takeDamages(strongLevel);
+    }
+
+    abstract public void takeDamages(int damages);
+
+    public void reset() {
+        position = 0;
+    }
 }
