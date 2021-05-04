@@ -1,8 +1,5 @@
 package characters;
 
-import game.Slot;
-import stuffs.Stuff;
-
 /**
  *
  * Classe Ennemy qui permet de créer un objet de type Ennemy, hérite de la classe abstraite Character

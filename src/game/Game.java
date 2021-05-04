@@ -1,21 +1,16 @@
 package game;
 
 // Character
-
 import characters.Character;
 
 // Menu
 import characters.Ennemy;
-import characters.Guerrier;
-import characters.Magicien;
 import menu.Menu;
 
 // Exceptions
 import exceptions.CharacterOutOfGameBoardException;
-import stuffs.Potion;
-import stuffs.Stuff;
 
-import java.util.List;
+// Scanner
 import java.util.Scanner;
 
 /**
@@ -49,9 +44,80 @@ public class Game {
         this.input = new Scanner(System.in);
     }
 
+    /**
+     * throwDice just stop the program and wait user action
+     */
     public void throwDice() {
         System.out.println("Lancé le Dé en appuyant sur Entrée");
         input.nextLine();
+    }
+
+    /**
+     * method fight for fight action between character and ennemies
+     */
+    public void fight() {
+        // Le personnage frappe l'ennemie
+        character.fight((Ennemy) gameBoard.getBoard().get(character.getPosition()));
+
+        // On regarde le résultat de la frappe du joueur sur l'ennemie
+        if (((Ennemy) gameBoard.getBoard().get(character.getPosition())).getLifeLevel() <= 0) {
+            // L'ennemie est vaincue
+            System.out.println("L'ennemie est vaincue est disparé dans les abimes !!!");
+            gameBoard.getBoard().set(character.getPosition(), null);
+        } else {
+            // L'ennemie à survécu
+            // L'ennemie inflige des dégats au joueur
+            System.out.println("L'ennemie à survécu a votre attaque.");
+            System.out.println("Il vous s'inflige " + ((Ennemy) gameBoard.getBoard().get(character.getPosition())).getStrongLevel() + " pts de dégats");
+            character.takeDamages(((Ennemy) gameBoard.getBoard().get(character.getPosition())).getStrongLevel());
+            // Et il s'enfuit
+            System.out.println("Et il s'enfuit !!!");
+        }
+
+        // On teste si le personnage est vaincue
+        if (character.getLifeLevel() <= 0) {
+            System.out.println("Vous êtes mort!!!");
+            character.setPosition(63);
+        } else {
+            System.out.println("Vous resortez de ce combat avec " + character.getLifeLevel() + " pts de vie");
+        }
+    }
+
+    /**
+     * Check the position of the character on the gameboard for understand the position element (ennemies, bonus or empty case)
+     */
+    public void checkPosition() {
+        // Test ce qui se trouve dans la case
+        if (gameBoard.getBoard().get(character.getPosition()) == null) {
+            // Case vide, on ne fait rien
+            System.out.println("Case vide");
+        } else if (gameBoard.getBoard().get(character.getPosition()) instanceof Ennemy) {
+            // Case ennemie, on lance un combat
+            System.out.println("BASSSSSTTTTOOOOOOONNNNNN!!!!!!");
+            System.out.println("Vous attaquez : " + gameBoard.getBoard().get(character.getPosition()));
+            fight();
+        } else {
+            // Case bonus, on récupère le bonus
+            character.drop(gameBoard.getBoard().get(character.getPosition()));
+        }
+    }
+
+    /**
+     * Check if the character life points and position
+     *
+     * @throws CharacterOutOfGameBoardException
+     */
+    public void checkInLive() throws CharacterOutOfGameBoardException {
+        // Levée d'une exception si le joueur à dépassé la case finale du plateau de jeu
+        if (character.getPosition() == 63) {
+            if (character.getLifeLevel() <= 0) {
+                System.out.println("Vous avez perdu!");
+            } else {
+                System.out.println("Bravo !!! Vous avez gagné");
+            }
+        } else {
+            throw new CharacterOutOfGameBoardException();
+        }
     }
 
     /**
@@ -63,70 +129,20 @@ public class Game {
      */
     public void launch() throws CharacterOutOfGameBoardException {
 
-        List<Slot> board = gameBoard.getBoard();
-
+        // Tantque l'on a pas passé la dernière position du plateau
         while (character.getPosition() < 63) {
             // On lance le Dé
             throwDice();
-
             // On déplace le personnage
             character.move(dice.throwDice());
-
             // On donne sa nouvelle position
             System.out.println("Position de " + character.getName() + " : " + character.getPosition());
-
-            // On teste la case sur laquelle est arrivée le personnage
-            if (board.get(character.getPosition()) == null) {
-                // Case vide
-                System.out.println("Case vide");
-            } else if (board.get(character.getPosition()) instanceof Ennemy) {
-                // Case ennemie un combat se lance
-                System.out.println("BASSSSSTTTTOOOOOOONNNNNN!!!!!!");
-
-                // Donne le type d'ennemie
-                System.out.println("Vous attaquez : " + board.get(character.getPosition()));
-
-                // Le personnage frappe l'ennemie
-                character.fight((Ennemy) board.get(character.getPosition()));
-
-                // On regarde le résultat de la frappe du joueur sur l'ennemie
-                if (((Ennemy) board.get(character.getPosition())).getLifeLevel() <= 0) {
-                    // L'ennemie est vaincue
-                    System.out.println("L'ennemie est vaincue est disparé dans les abimes !!!");
-                    board.set(character.getPosition(), null);
-                } else {
-                    // L'ennemie à survécu
-                    // L'ennemie inflige des dégats au joueur
-                    System.out.println("L'ennemie à survécu a votre attaque.");
-                    System.out.println("Il vous s'inflige " + ((Ennemy) board.get(character.getPosition())).getStrongLevel() + " pts de dégats");
-                    character.takeDamages(((Ennemy) board.get(character.getPosition())).getStrongLevel());
-                    // Et il s'enfuit
-                    System.out.println("Et il s'enfuit !!!");
-                }
-
-                // On teste si le personnage est vaincue
-                if (character.getLifeLevel() <= 0) {
-                    System.out.println("Vous êtes mort!!!");
-                    character.setPosition(63);
-                } else {
-                    System.out.println("Vous resortez de ce combat avec " + character.getLifeLevel() + " pts de vie");
-                }
-            } else {
-                // C'est une case bonus, on récupére le bonus
-                character.drop(board.get(character.getPosition()));
-            }
+            // On test se qui se trouve dans la case
+            checkPosition();
         }
 
-        // Levée d'une exception si le joueur à dépassé la case finale du plateau de jeu
-        if (character.getPosition() == 63) {
-            if (character.getLifeLevel() <= 0) {
-                System.out.println("Vous avez perdu!");
-            } else {
-                System.out.println("Bravo !!! Vous avez gagné");
-            }
-        } else {
-            throw new CharacterOutOfGameBoardException();
-        }
+        // Verifie si le joueur est toujours en vie
+        checkInLive();
     }
 
     /**

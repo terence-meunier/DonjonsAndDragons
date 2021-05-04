@@ -133,6 +133,7 @@ public class Guerrier extends Character {
     }
 
     public void fight(Ennemy ennemy) {
+        super.fight(ennemy);
         if (weapon != null) {
             ennemy.takeDamages(weapon.getAtqLevel());
         }

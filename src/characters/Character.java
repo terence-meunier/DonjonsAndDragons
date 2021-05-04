@@ -2,7 +2,6 @@ package characters;
 
 import game.Slot;
 import stuffs.Potion;
-import stuffs.Stuff;
 
 /**
  *

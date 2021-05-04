@@ -132,6 +132,7 @@ public class Magicien extends Character {
     }
 
     public void fight(Ennemy ennemy) {
+        super.fight(ennemy);
         if (spell != null) {
             ennemy.takeDamages(spell.getAtqLevel());
         }
