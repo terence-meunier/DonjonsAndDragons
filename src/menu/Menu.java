@@ -5,18 +5,23 @@ import java.util.Scanner;
 import characters.Character;
 import characters.Warrior;
 import characters.Wizard;
+import game.Game;
 
 public class Menu {
     private Scanner input;
+    private Game game;
 
-    public Menu() { this.input = new Scanner(System.in); }
+    public Menu() {
+        this.input = new Scanner(System.in);
+        this.game = new Game();
+    }
 
-    public String tellAnyQuestions(String question) {
+    private String tellAnyQuestions(String question) {
         System.out.println(question);
         return input.nextLine();
     }
 
-    public int tellAnyQuestionsInt(String question, int minRange, int maxRange) {
+    private int tellAnyQuestionsInt(String question, int minRange, int maxRange) {
         System.out.println(question);
         int answer = input.nextInt();
         input.nextLine();
@@ -27,7 +32,7 @@ public class Menu {
         return tellAnyQuestionsInt(question, minRange, maxRange);
     }
 
-    public Character mainMenu(Character character) {
+    public Character mainMenu() {
         int choice = 0;
 
         while (choice != 4) {
