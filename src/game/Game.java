@@ -15,10 +15,6 @@ public class Game {
         this.dice = new Dice();
     }
 
-    public void launchRound() {
-        character.move(dice.throwDice());
-    }
-
     public Character getCharacter() {
         return character;
     }

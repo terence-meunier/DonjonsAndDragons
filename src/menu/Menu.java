@@ -154,7 +154,7 @@ public class Menu {
     public void playMenu() {
         // On lance le dé
         tellAnyQuestion("Lancer le dé en appuyant sur Entrée");
-        game.launchRound();
+        game.getCharacter().move(game.getDice().throwDice());
         System.out.println("Position de " + game.getCharacter().getName() + " : case " + game.getCharacter().getPosition());
 
         // On verifie ce qui est présent sur la case que l'on a atteint
@@ -213,15 +213,31 @@ public class Menu {
             // Si l'ennemie survie il frappe le personnage puis s'enfuit
             System.out.println("L'ennemie à survécu");
             ((Ennemy) game.getGameBoard().getBoard().get(game.getCharacter().getPosition())).fight(game.getCharacter());
+
+            // On teste si l'on a survécu au combat
+            if (game.getCharacter().isAlive()) {
+                System.out.println("Il vous reste : " + game.getCharacter().getLife() + " pts de vie");
+                int choice = tellAnyQuestionInt("Voulez vous continuer le combat (1: Oui / 2: Non) ?", 1, 2);
+                switch (choice) {
+                    case 1: {
+                        fight();
+                        break;
+                    }
+                    case 2: {
+                        System.out.println("Vous prenez la fuite...");
+                        game.getCharacter().escape(game.getDice().throwDice());
+                        System.out.println("Retour en case : " + game.getCharacter().getPosition());
+                        checkPosition();
+                        break;
+                    }
+                }
+            } else {
+                game.getCharacter().setPosition(63);
+            }
         } else {
             // Sinon il disparait du plateau de jeu
             System.out.println("L'ennemie est mort");
             game.getGameBoard().getBoard().set(game.getCharacter().getPosition(), null);
-        }
-
-        // On teste si l'on a survécu au combat
-        if (!game.getCharacter().isAlive()) {
-            game.getCharacter().setPosition(63);
         }
     }
 }
