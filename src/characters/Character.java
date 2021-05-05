@@ -1,6 +1,6 @@
 package characters;
 
-import game.Slot;
+import game.Location;
 import stuffs.Potion;
 
 /**
@@ -13,7 +13,7 @@ import stuffs.Potion;
  * @author Térence MEUNIER
  * @version 1.0
  */
-abstract public class Character extends Slot {
+abstract public class Character implements Location {
 
     protected String name;
     protected int life;
@@ -153,16 +153,16 @@ abstract public class Character extends Slot {
 
     /**
      * Method for drop an item on the gameboard location
-     * @param slot
+     * @param location
      */
-    public void drop(Slot slot) {
-        if (slot instanceof Potion) {
+    public void drop(Location location) {
+        if (location instanceof Potion) {
             // Si le slot contient une potion
             System.out.println("Santé actuel de " + name + " : " + life + " points de vie");
             if (life < 10) {
-                life += ((Potion) slot).getLifePoints();
-                System.out.println(((Potion) slot).getName());
-                System.out.println("+ " + ((Potion) slot).getLifePoints() + " pts de vie");
+                life += ((Potion) location).getLifePoints();
+                System.out.println(((Potion) location).getName());
+                System.out.println("+ " + ((Potion) location).getLifePoints() + " pts de vie");
                 if (life > 10) {
                     System.out.println("Votre santé est pleine");
                     life = 10;

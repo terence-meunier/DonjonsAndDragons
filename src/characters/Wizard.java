@@ -1,6 +1,6 @@
 package characters;
 
-import game.Slot;
+import game.Location;
 import stuffs.Spell;
 import stuffs.Weapon;
 
@@ -50,18 +50,18 @@ public class Wizard extends Character {
         this.filter = "Soin";
     }
 
-    public void drop(Slot slot) {
-        super.drop(slot);
+    public void drop(Location location) {
+        super.drop(location);
 
-        if (slot instanceof Spell) {
+        if (location instanceof Spell) {
             if (spell == null) {
-                System.out.println("Vous avez trouvé un sort : " + slot);
-                spell = (Spell) slot;
+                System.out.println("Vous avez trouvé un sort : " + location);
+                spell = (Spell) location;
             } else {
                 Scanner input = new Scanner(System.in);
                 int choice = 0;
                 while (choice != 1 && choice != 2) {
-                    System.out.println("Sort trouvé : " + slot);
+                    System.out.println("Sort trouvé : " + location);
                     System.out.println("Sort actuel : " + spell);
                     System.out.println("Changer de sort (1: Oui / 2: Non) ?");
                     choice = input.nextInt();
@@ -70,7 +70,7 @@ public class Wizard extends Character {
                     switch (choice) {
                         case 1: {
                             System.out.println("Changement de sort");
-                            spell = (Spell) slot;
+                            spell = (Spell) location;
                             break;
                         }
                         case 2: {
@@ -83,7 +83,7 @@ public class Wizard extends Character {
                     }
                 }
             }
-        } else if (slot instanceof Weapon) {
+        } else if (location instanceof Weapon) {
             System.out.println("Les armes ne sont pas faites pour les magiciens, passez votre chemin !");
         }
 

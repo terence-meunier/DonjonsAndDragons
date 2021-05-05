@@ -1,6 +1,6 @@
 package characters;
 
-import game.Slot;
+import game.Location;
 import stuffs.Spell;
 import stuffs.Weapon;
 
@@ -50,18 +50,18 @@ public class Warrior extends Character {
         this.shield = "Ecu";
     }
 
-    public void drop(Slot slot) {
-        super.drop(slot);
+    public void drop(Location location) {
+        super.drop(location);
 
-        if (slot instanceof Weapon) {
+        if (location instanceof Weapon) {
             if (weapon == null) {
-                System.out.println("Vous avec trouvé une arme : " + slot);
-                weapon = (Weapon) slot;
+                System.out.println("Vous avec trouvé une arme : " + location);
+                weapon = (Weapon) location;
             } else {
                 Scanner input = new Scanner(System.in);
                 int choice = 0;
                 while (choice != 1 && choice != 2) {
-                    System.out.println("Arme trouvé : " + slot);
+                    System.out.println("Arme trouvé : " + location);
                     System.out.println("Arme actuel : " + weapon);
                     System.out.println("Changer d'arme (1: Oui / 2: Non) ?");
                     choice = input.nextInt();
@@ -70,7 +70,7 @@ public class Warrior extends Character {
                     switch (choice) {
                         case 1: {
                             System.out.println("Changement d'arme");
-                            weapon = (Weapon) slot;
+                            weapon = (Weapon) location;
                             break;
                         }
                         case 2: {
@@ -83,7 +83,7 @@ public class Warrior extends Character {
                     }
                 }
             }
-        } else if (slot instanceof Spell) {
+        } else if (location instanceof Spell) {
             System.out.println("Les sorts ne sont pas faits pour les guerriers, passez votre chemin!");
         }
     }
