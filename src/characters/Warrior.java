@@ -72,7 +72,8 @@ public class Warrior extends Character {
         }
     }
 
-    public void fight(Ennemy ennemy) {
+    @Override
+    public void fight(Character ennemy) {
         super.fight(ennemy);
         if (weapon != null) {
             ennemy.takeDamages(weapon.getAtqLevel());

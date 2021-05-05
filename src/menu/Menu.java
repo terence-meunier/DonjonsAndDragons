@@ -152,10 +152,12 @@ public class Menu {
     }
 
     public void playMenu() {
+        // On lance le dé
         tellAnyQuestion("Lancer le dé en appuyant sur Entrée");
         game.launchRound();
         System.out.println("Position de " + game.getCharacter().getName() + " : case " + game.getCharacter().getPosition());
 
+        // On verifie ce qui est présent sur la case que l'on a atteint
         checkPosition();
 
         if (game.getCharacter().getPosition() == 63) {
@@ -189,15 +191,37 @@ public class Menu {
         }
 
         if(game.getGameBoard().getBoard().get(game.getCharacter().getPosition()) instanceof Stuff) {
+            System.out.println("Vous récupérez : " + game.getGameBoard().getBoard().get(game.getCharacter().getPosition()));
             game.getCharacter().dropItem(game.getGameBoard().getBoard().get(game.getCharacter().getPosition()));
+            System.out.println("Stats personnage : " + game.getCharacter());
         }
 
         if(game.getGameBoard().getBoard().get(game.getCharacter().getPosition()) instanceof Ennemy) {
+            System.out.println("Vous rencontrez : " + game.getGameBoard().getBoard().get(game.getCharacter().getPosition()));
             fight();
+            System.out.println("Stats personnage : " + game.getCharacter());
         }
     }
 
     private void fight() {
+        // On frappe l'ennemie
+        System.out.println("Vous frappez l'ennemie");
+        game.getCharacter().fight((Ennemy) game.getGameBoard().getBoard().get(game.getCharacter().getPosition()));
 
+        // On teste si l'ennemie à survécu
+        if (((Ennemy) game.getGameBoard().getBoard().get(game.getCharacter().getPosition())).isAlive()) {
+            // Si l'ennemie survie il frappe le personnage puis s'enfuit
+            System.out.println("L'ennemie à survécu");
+            ((Ennemy) game.getGameBoard().getBoard().get(game.getCharacter().getPosition())).fight(game.getCharacter());
+        } else {
+            // Sinon il disparait du plateau de jeu
+            System.out.println("L'ennemie est mort");
+            game.getGameBoard().getBoard().set(game.getCharacter().getPosition(), null);
+        }
+
+        // On teste si l'on a survécu au combat
+        if (!game.getCharacter().isAlive()) {
+            game.getCharacter().setPosition(63);
+        }
     }
 }

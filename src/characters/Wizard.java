@@ -72,7 +72,8 @@ public class Wizard extends Character {
         }
     }
 
-    public void fight(Ennemy ennemy) {
+    @Override
+    public void fight(Character ennemy) {
         super.fight(ennemy);
         if (spell != null) {
             ennemy.takeDamages(spell.getAtqLevel());

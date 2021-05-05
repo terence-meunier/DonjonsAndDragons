@@ -161,7 +161,7 @@ abstract public class Character implements Location {
      * Method for fight an ennemy
      * @param ennemy
      */
-    public void fight(Ennemy ennemy) {
+    public void fight(Character ennemy) {
         ennemy.takeDamages(atk);
     }
 
