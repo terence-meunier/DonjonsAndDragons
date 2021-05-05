@@ -152,6 +152,11 @@ public class Menu {
     }
 
     public void playMenu() {
+        System.out.println();
+        System.out.println("*************************************");
+        System.out.println("************* Nouveau tour **********");
+        System.out.println("*************************************");
+        System.out.println();
         // On lance le dé
         tellAnyQuestion("Lancer le dé en appuyant sur Entrée");
         game.getCharacter().move(game.getDice().throwDice());
@@ -198,8 +203,25 @@ public class Menu {
 
         if(game.getGameBoard().getBoard().get(game.getCharacter().getPosition()) instanceof Ennemy) {
             System.out.println("Vous rencontrez : " + game.getGameBoard().getBoard().get(game.getCharacter().getPosition()));
-            fight();
+            if (((Ennemy) game.getGameBoard().getBoard().get(game.getCharacter().getPosition())).getName() == "Orc") {
+                if (game.getCharacter() instanceof Warrior) {
+                    fight();
+                } else {
+                    System.out.println("Les " + game.getCharacter().getName() + " ne s'attaque qu'au Guerrier");
+                }
+            } else {
+                fight();
+            }
+            System.out.println();
+            System.out.println("*****************************************");
+            System.out.println("*****************************************");
+            System.out.println();
+            System.out.println();
             System.out.println("Stats personnage : " + game.getCharacter());
+            System.out.println();
+            System.out.println();
+            System.out.println("*****************************************");
+            System.out.println("*****************************************");
         }
     }
 
@@ -212,6 +234,7 @@ public class Menu {
         if (((Ennemy) game.getGameBoard().getBoard().get(game.getCharacter().getPosition())).isAlive()) {
             // Si l'ennemie survie il frappe le personnage puis s'enfuit
             System.out.println("L'ennemie à survécu");
+            System.out.println("L'ennemie vous frappe");
             ((Ennemy) game.getGameBoard().getBoard().get(game.getCharacter().getPosition())).fight(game.getCharacter());
 
             // On teste si l'on a survécu au combat
