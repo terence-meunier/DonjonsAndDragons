@@ -12,11 +12,11 @@ import java.util.List;
 public class GameBoard {
     private int nbCases;
     // A changer
-    private List<Slot> board;
+    private List<Location> board;
 
     public GameBoard() {
         this.nbCases = 64;
-        this.board = new ArrayList<Slot>();
+        this.board = new ArrayList<Location>();
         generateGameBoard();
     }
 
@@ -51,7 +51,7 @@ public class GameBoard {
         Collections.shuffle(board);
     }
 
-    public List<Slot> getBoard() {
+    public List<Location> getBoard() {
         return board;
     }
 }

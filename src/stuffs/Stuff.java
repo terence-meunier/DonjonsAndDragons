@@ -1,8 +1,8 @@
 package stuffs;
 
-import game.Slot;
+import game.Location;
 
-abstract public class Stuff extends Slot {
+abstract public class Stuff implements Location {
     private String name;
 
     public Stuff(String name) {
