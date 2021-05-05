@@ -161,7 +161,7 @@ abstract public class Character implements Location {
      * Method for fight an ennemy
      * @param ennemy
      */
-    public void fight(Character ennemy) {
+    public void fight(Ennemy ennemy) {
         ennemy.takeDamages(atk);
     }
 
@@ -187,4 +187,9 @@ abstract public class Character implements Location {
     public boolean isAlive() {
         return life > 0;
     }
+
+    /**
+     * Method for escape
+     */
+    public void escape(int nbcases) { position -= nbcases; }
 }
