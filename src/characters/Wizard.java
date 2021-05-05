@@ -13,14 +13,14 @@ import java.util.Scanner;
  * @version 1.0
  * @see Character
  */
-public class Magicien extends Character implements Player {
+public class Wizard extends Character {
     private Spell spell;
     private String filter;
 
     /**
      * Constructeur vide
      */
-    public Magicien() {
+    public Wizard() {
         this(null);
     }
 
@@ -30,7 +30,7 @@ public class Magicien extends Character implements Player {
      * @param name String
      *             Le nom du magicien
      */
-    public Magicien(String name) {
+    public Wizard(String name) {
         this(name, 3, 8);
     }
 
@@ -44,7 +44,7 @@ public class Magicien extends Character implements Player {
      * @param strongLevel int
      *                    Le niveau d'attaque du magicien
      */
-    public Magicien(String name, int lifeLevel, int strongLevel) {
+    public Wizard(String name, int lifeLevel, int strongLevel) {
         super(name, lifeLevel, strongLevel);
         this.spell = null;
         this.filter = "Soin";
