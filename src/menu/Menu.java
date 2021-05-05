@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import characters.Character;
 import characters.Warrior;
-import characters.Magicien;
+import characters.Wizard;
 
 public class Menu {
     private Scanner input;
@@ -57,7 +57,7 @@ public class Menu {
                 }
                 case 2: {
                     String name = tellAnyQuestions("Indiquer le nom du magicien :");
-                    character = new Magicien(name);
+                    character = new Wizard(name);
                     System.out.println(character.getName() + " a bien été créé");
                     break;
                 }
