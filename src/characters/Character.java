@@ -191,5 +191,10 @@ abstract public class Character implements Location {
     /**
      * Method for escape
      */
-    public void escape(int nbcases) { position -= nbcases; }
+    public void escape(int nbcases) {
+        position -= nbcases;
+        if (position < 0) {
+            position = 0;
+        }
+    }
 }

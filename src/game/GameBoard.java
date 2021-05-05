@@ -42,6 +42,8 @@ public class GameBoard {
                 board.add(new Potion("Potion de vie standard", 2));
             } else if (i == 28 || i == 41) {
                 board.add(new Potion("Grande potion de vie", 5));
+            } else if (i == 34 || i == 55 || i == 51 || i == 46) {
+                board.add(new Ennemy("Orc", 10, 6));
             } else {
                 board.add(null);
             }
