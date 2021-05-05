@@ -16,8 +16,8 @@ import stuffs.Potion;
 abstract public class Character extends Slot {
 
     protected String name;
-    protected int lifeLevel;
-    protected int strongLevel;
+    protected int life;
+    protected int atk;
     protected int position;
 
     /**
@@ -34,20 +34,9 @@ abstract public class Character extends Slot {
      */
     public Character(String name, int lifeLevel, int strongLevel) {
         this.name = name;
-        this.lifeLevel = lifeLevel;
-        this.strongLevel = strongLevel;
+        this.life = lifeLevel;
+        this.atk = strongLevel;
         this.position = 0;
-    }
-
-    public String toString() {
-        String output = "";
-        output += "Nom : " + name + "\n";
-        output += "-----------------------\n";
-        output += "\n";
-        output += "niveau de vie : " + lifeLevel + "\n";
-        output += "niveau d'attaque : " + strongLevel + "\n";
-        output += "-----------------------------------------\n";
-        return output;
     }
 
     /**
@@ -94,22 +83,22 @@ abstract public class Character extends Slot {
      *
      * Getter permettant de récupèrer le niveau de vie du personnage
      *
-     * @return int lifeLevel
+     * @return int life
      *      Le niveau de vie du personnage dans un type int (primitif)
      */
-    public int getLifeLevel() {
-        return lifeLevel;
+    public int getLife() {
+        return life;
     }
 
     /**
      *
      * Setter permettant de modifier le niveau de vie du personnage
      *
-     * @param lifeLevel int
+     * @param life int
      *      Le niveau de vie du personnage qui est de type int (primitif)
      */
-    public void setLifeLevel(int lifeLevel) {
-        this.lifeLevel = lifeLevel;
+    public void setLife(int life) {
+        this.life = life;
     }
 
     /**
@@ -119,8 +108,8 @@ abstract public class Character extends Slot {
      * @return int strongLevel
      *      Le niveau d'attaque du personnage dans un type int (primitif)
      */
-    public int getStrongLevel() {
-        return strongLevel;
+    public int getAtk() {
+        return atk;
     }
 
     /**
@@ -130,10 +119,30 @@ abstract public class Character extends Slot {
      * @param strongLevel int
      *                    Le niveau d'attaque du personnage qui est de de type int (primitif)
      */
-    public void setStrongLevel(int strongLevel) {
-        this.strongLevel = strongLevel;
+    public void setAtk(int strongLevel) {
+        this.atk = strongLevel;
     }
 
+    /**
+     * Method toString
+     * @return
+     */
+    @Override
+    public String toString() {
+        String output = "";
+        output += "Nom : " + name + "\n";
+        output += "-----------------------\n";
+        output += "\n";
+        output += "niveau de vie : " + life + "\n";
+        output += "niveau d'attaque : " + atk + "\n";
+        output += "-----------------------------------------\n";
+        return output;
+    }
+
+    /**
+     * Method for move the player on the gameboard with throw dice
+     * @param throwDice
+     */
     public void move(int throwDice) {
         int out = throwDice - (63 - this.position);
         this.position += throwDice;
@@ -142,32 +151,57 @@ abstract public class Character extends Slot {
         }
     }
 
+    /**
+     * Method for drop an item on the gameboard location
+     * @param slot
+     */
     public void drop(Slot slot) {
         if (slot instanceof Potion) {
             // Si le slot contient une potion
-            System.out.println("Santé actuel de " + name + " : " + lifeLevel + " points de vie");
-            if (lifeLevel < 10) {
-                lifeLevel += ((Potion) slot).getLifePoints();
+            System.out.println("Santé actuel de " + name + " : " + life + " points de vie");
+            if (life < 10) {
+                life += ((Potion) slot).getLifePoints();
                 System.out.println(((Potion) slot).getName());
                 System.out.println("+ " + ((Potion) slot).getLifePoints() + " pts de vie");
-                if (lifeLevel > 10) {
+                if (life > 10) {
                     System.out.println("Votre santé est pleine");
-                    lifeLevel = 10;
+                    life = 10;
                 }
             } else {
                 System.out.println("Vous venez de trouver une potion, mais votre santé est déjà pleine");
             }
-            System.out.println("Santé actuel de " + name + " : " + lifeLevel + " points de vie");
+            System.out.println("Santé actuel de " + name + " : " + life + " points de vie");
         }
     }
 
-    public void fight(Ennemy ennemy) {
-        ennemy.takeDamages(strongLevel);
+    /**
+     * Method for fight an ennemy
+     * @param ennemy
+     */
+    public void fight(Character ennemy) {
+        ennemy.takeDamages(atk);
     }
 
-    abstract public void takeDamages(int damages);
+    /**
+     * Method for take damages
+     * @param damages
+     */
+    public void takeDamages(int damages) {
+        life -= damages;
+    }
 
+    /**
+     * Method for reset position of character to begin gameboard
+     */
     public void reset() {
         position = 0;
+    }
+
+    /**
+     * Method for test if the character is alive
+     * @return
+     */
+    public boolean isAlive() {
+        return life > 0;
     }
 }

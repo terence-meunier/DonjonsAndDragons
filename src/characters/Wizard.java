@@ -96,13 +96,9 @@ public class Wizard extends Character {
         }
     }
 
-    public void takeDamages(int damages) {
-        lifeLevel -= damages;
-    }
-
     public void reset() {
         super.reset();
-        lifeLevel = 3;
+        life = 3;
         spell = null;
     }
 

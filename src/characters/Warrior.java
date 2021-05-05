@@ -95,13 +95,9 @@ public class Warrior extends Character {
         }
     }
 
-    public void takeDamages(int damages) {
-        lifeLevel -= damages;
-    }
-
     public void reset() {
         super.reset();
-        lifeLevel = 5;
+        life = 5;
         weapon = null;
     }
 

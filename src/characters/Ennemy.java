@@ -14,17 +14,13 @@ public class Ennemy extends Character {
      * Constructeur avec 3 paramètres
      * @param name String
      *             Le nom de l'ennemie
-     * @param lifeLevel int
+     * @param life int
      *             Les points de vie de l'ennemie
-     * @param atqLevel int
+     * @param atk int
      *              Les points d'attaque de l'ennemie
      */
-    public Ennemy(String name, int lifeLevel, int atqLevel) {
-        super(name, lifeLevel, atqLevel);
-    }
-
-    public void takeDamages(int damages) {
-        lifeLevel -= damages;
+    public Ennemy(String name, int life, int atk) {
+        super(name, life, atk);
     }
 
 }
