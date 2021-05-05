@@ -50,48 +50,6 @@ public class Wizard extends Character {
         this.filter = "Soin";
     }
 
-    /**
-     * Getter Récupère le sort du magicien sous la forme d'un objet de type Spell
-     *
-     * @return Spell spell
-     * @see Spell
-     */
-    public Spell getSpell() {
-        return spell;
-    }
-
-    /**
-     * Setter affecter un nouveau sort au magicien
-     *
-     * @param spell Le sort à affecté au magicien
-     */
-    public void setSpell(Spell spell) {
-        this.spell = spell;
-    }
-
-    /**
-     * Getter permettant de récupèrer le filtre du magicien
-     *
-     * @return String filter
-     * Le filtre du magicien sous la forme d'un objet String
-     */
-    public String getFilter() {
-        return filter;
-    }
-
-    /**
-     * Setter permettnat d'affecter un filtre au magicien
-     *
-     * @param filter Le filtre à affecté au magicien
-     */
-    public void setFilter(String filter) {
-        this.filter = filter;
-    }
-
-    public String toString() {
-        return super.toString() + "\n---- EQUIPEMENTS -----\nArme : " + spell + "\nBouclier : " + filter;
-    }
-
     public void drop(Slot slot) {
         super.drop(slot);
 
@@ -146,5 +104,51 @@ public class Wizard extends Character {
         super.reset();
         lifeLevel = 3;
         spell = null;
+    }
+
+    public void useSpellOnEnnemy(Character ennemy) {
+
+    }
+
+    /**
+     * Getter Récupère le sort du magicien sous la forme d'un objet de type Spell
+     *
+     * @return Spell spell
+     * @see Spell
+     */
+    public Spell getSpell() {
+        return spell;
+    }
+
+    /**
+     * Setter affecter un nouveau sort au magicien
+     *
+     * @param spell Le sort à affecté au magicien
+     */
+    public void setSpell(Spell spell) {
+        this.spell = spell;
+    }
+
+    /**
+     * Getter permettant de récupèrer le filtre du magicien
+     *
+     * @return String filter
+     * Le filtre du magicien sous la forme d'un objet String
+     */
+    public String getFilter() {
+        return filter;
+    }
+
+    /**
+     * Setter permettnat d'affecter un filtre au magicien
+     *
+     * @param filter Le filtre à affecté au magicien
+     */
+    public void setFilter(String filter) {
+        this.filter = filter;
+    }
+
+    public String toString() {
+        return super.toString() + "\n---- EQUIPEMENTS -----\nArme : " + spell + "\nBouclier : " + filter;
     }
 }
