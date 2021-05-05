@@ -1,5 +1,7 @@
 package characters;
 
+import game.Location;
+
 /**
  *
  * Classe Ennemy qui permet de créer un objet de type Ennemy, hérite de la classe abstraite Character
@@ -23,4 +25,8 @@ public class Ennemy extends Character {
         super(name, life, atk);
     }
 
+    @Override
+    public void dropItem(Location location) {
+
+    }
 }

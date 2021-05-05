@@ -15,15 +15,31 @@ public class Game {
         this.dice = new Dice();
     }
 
-    private void round() {
-
+    public void launchRound() {
+        character.move(dice.throwDice());
     }
 
-    private void run() {
-
+    public Character getCharacter() {
+        return character;
     }
 
-    public void init() {
+    public GameBoard getGameBoard() {
+        return gameBoard;
+    }
 
+    public Dice getDice() {
+        return dice;
+    }
+
+    public void setCharacter(Character character) {
+        this.character = character;
+    }
+
+    public void setGameBoard(GameBoard gameBoard) {
+        this.gameBoard = gameBoard;
+    }
+
+    public void setDice(Dice dice) {
+        this.dice = dice;
     }
 }
