@@ -139,7 +139,7 @@ public class Game {
             fight();
         } else {
             // Case bonus, on récupère le bonus
-            character.drop(gameBoard.getBoard().get(character.getPosition()));
+            character.dropItem(gameBoard.getBoard().get(character.getPosition()));
         }
     }
 
