@@ -156,13 +156,13 @@ public class Menu {
                 }
                 case 2: {
                     System.out.println("Donner les nouveaux points de vie :");
-                    character.setLifeLevel(input.nextInt());
+                    character.setLife(input.nextInt());
                     input.nextLine();
                     break;
                 }
                 case 3: {
                     System.out.println("Donner les nouveaux points d'attaque :");
-                    character.setStrongLevel(input.nextInt());
+                    character.setAtk(input.nextInt());
                     input.nextLine();
                     break;
                 }

@@ -81,7 +81,7 @@ public class Game {
         character.fight((Ennemy) gameBoard.getBoard().get(character.getPosition()));
 
         // On regarde le résultat de la frappe du joueur sur l'ennemie
-        if (((Ennemy) gameBoard.getBoard().get(character.getPosition())).getLifeLevel() <= 0) {
+        if (((Ennemy) gameBoard.getBoard().get(character.getPosition())).getLife() <= 0) {
             // L'ennemie est vaincue
             System.out.println("L'ennemie est vaincue est disparé dans les abimes !!!");
             gameBoard.getBoard().set(character.getPosition(), null);
@@ -89,15 +89,15 @@ public class Game {
             // L'ennemie à survécu
             // L'ennemie inflige des dégats au joueur
             System.out.println("L'ennemie à survécu a votre attaque.");
-            System.out.println("Il vous s'inflige " + ((Ennemy) gameBoard.getBoard().get(character.getPosition())).getStrongLevel() + " pts de dégats");
-            character.takeDamages(((Ennemy) gameBoard.getBoard().get(character.getPosition())).getStrongLevel());
+            System.out.println("Il vous s'inflige " + ((Ennemy) gameBoard.getBoard().get(character.getPosition())).getAtk() + " pts de dégats");
+            character.takeDamages(((Ennemy) gameBoard.getBoard().get(character.getPosition())).getAtk());
 
             // On teste si le personnage est vaincue
-            if (character.getLifeLevel() <= 0) {
+            if (character.getLife() <= 0) {
                 System.out.println("Vous êtes mort!!!");
                 character.setPosition(63);
             } else {
-                System.out.println("Vous resortez de ce combat avec " + character.getLifeLevel() + " pts de vie");
+                System.out.println("Vous resortez de ce combat avec " + character.getLife() + " pts de vie");
                 int choice = tellAnyQuestionsInt("Voulez vous continuez (1: Oui / 2: Non) : ", 1, 2);
                 switch (choice) {
                     case 1: {
@@ -151,7 +151,7 @@ public class Game {
     public void checkInLive() throws CharacterOutOfGameBoardException {
         // Levée d'une exception si le joueur à dépassé la case finale du plateau de jeu
         if (character.getPosition() == 63) {
-            if (character.getLifeLevel() <= 0) {
+            if (character.getLife() <= 0) {
                 System.out.println("Vous avez perdu!");
             } else {
                 System.out.println("Bravo !!! Vous avez gagné");
