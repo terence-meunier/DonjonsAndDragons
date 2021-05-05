@@ -1,6 +1,7 @@
 package characters;
 
 import game.Location;
+import stuffs.Potion;
 import stuffs.Spell;
 import stuffs.Weapon;
 
@@ -50,41 +51,24 @@ public class Warrior extends Character {
         this.shield = "Ecu";
     }
 
-    public void drop(Location location) {
-        super.drop(location);
+    public void dropItem(Location location) {
+        // L'emplacement contient une potion
+        if (location instanceof Potion) {
+            life += ((Potion) location).getLife();
+            if (life > 10) {
+                life = 10;
+            }
+        }
 
+        // L'emplacement contient une arme
         if (location instanceof Weapon) {
             if (weapon == null) {
-                System.out.println("Vous avec trouvé une arme : " + location);
                 weapon = (Weapon) location;
             } else {
-                Scanner input = new Scanner(System.in);
-                int choice = 0;
-                while (choice != 1 && choice != 2) {
-                    System.out.println("Arme trouvé : " + location);
-                    System.out.println("Arme actuel : " + weapon);
-                    System.out.println("Changer d'arme (1: Oui / 2: Non) ?");
-                    choice = input.nextInt();
-                    input.nextLine();
-
-                    switch (choice) {
-                        case 1: {
-                            System.out.println("Changement d'arme");
-                            weapon = (Weapon) location;
-                            break;
-                        }
-                        case 2: {
-                            System.out.println("Arme actuel conservé");
-                            break;
-                        }
-                        default: {
-                            System.out.println("Choix non valide");
-                        }
-                    }
+                if (((Weapon) location).getAtqLevel() > weapon.getAtqLevel()) {
+                    weapon = (Weapon) location;
                 }
             }
-        } else if (location instanceof Spell) {
-            System.out.println("Les sorts ne sont pas faits pour les guerriers, passez votre chemin!");
         }
     }
 

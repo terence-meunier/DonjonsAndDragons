@@ -1,18 +1,18 @@
 package stuffs;
 
 public class Potion extends Stuff {
-    private int lifePoints;
+    private int life;
 
-    public Potion(String name, int lifePoints) {
+    public Potion(String name, int life) {
         super(name);
-        this.lifePoints = lifePoints;
+        this.life = life;
     }
 
-    public int getLifePoints() {
-        return lifePoints;
+    public int getLife() {
+        return life;
     }
 
-    public void setLifePoints(int lifePoints) {
-        this.lifePoints = lifePoints;
+    public void setLife(int life) {
+        this.life = life;
     }
 }

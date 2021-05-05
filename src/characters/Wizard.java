@@ -1,6 +1,7 @@
 package characters;
 
 import game.Location;
+import stuffs.Potion;
 import stuffs.Spell;
 import stuffs.Weapon;
 
@@ -50,43 +51,25 @@ public class Wizard extends Character {
         this.filter = "Soin";
     }
 
-    public void drop(Location location) {
-        super.drop(location);
-
-        if (location instanceof Spell) {
-            if (spell == null) {
-                System.out.println("Vous avez trouvé un sort : " + location);
-                spell = (Spell) location;
-            } else {
-                Scanner input = new Scanner(System.in);
-                int choice = 0;
-                while (choice != 1 && choice != 2) {
-                    System.out.println("Sort trouvé : " + location);
-                    System.out.println("Sort actuel : " + spell);
-                    System.out.println("Changer de sort (1: Oui / 2: Non) ?");
-                    choice = input.nextInt();
-                    input.nextLine();
-
-                    switch (choice) {
-                        case 1: {
-                            System.out.println("Changement de sort");
-                            spell = (Spell) location;
-                            break;
-                        }
-                        case 2: {
-                            System.out.println("Sort actuel conservé");
-                            break;
-                        }
-                        default: {
-                            System.out.println("Choix non valide");
-                        }
-                    }
-                }
+    public void dropItem(Location location) {
+        // L'emplacement contient une potion
+        if (location instanceof Potion) {
+            life += ((Potion) location).getLife();
+            if (life > 8) {
+                life = 8;
             }
-        } else if (location instanceof Weapon) {
-            System.out.println("Les armes ne sont pas faites pour les magiciens, passez votre chemin !");
         }
 
+        // L'emplacement contient une arme
+        if (location instanceof Spell) {
+            if (spell == null) {
+                spell = (Spell) location;
+            } else {
+                if (((Spell) location).getAtqLevel() > spell.getAtqLevel()) {
+                    spell = (Spell) location;
+                }
+            }
+        }
     }
 
     public void fight(Ennemy ennemy) {

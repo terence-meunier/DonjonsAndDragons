@@ -155,24 +155,7 @@ abstract public class Character implements Location {
      * Method for drop an item on the gameboard location
      * @param location
      */
-    public void drop(Location location) {
-        if (location instanceof Potion) {
-            // Si le slot contient une potion
-            System.out.println("Santé actuel de " + name + " : " + life + " points de vie");
-            if (life < 10) {
-                life += ((Potion) location).getLifePoints();
-                System.out.println(((Potion) location).getName());
-                System.out.println("+ " + ((Potion) location).getLifePoints() + " pts de vie");
-                if (life > 10) {
-                    System.out.println("Votre santé est pleine");
-                    life = 10;
-                }
-            } else {
-                System.out.println("Vous venez de trouver une potion, mais votre santé est déjà pleine");
-            }
-            System.out.println("Santé actuel de " + name + " : " + life + " points de vie");
-        }
-    }
+    abstract public void dropItem(Location location);
 
     /**
      * Method for fight an ennemy
