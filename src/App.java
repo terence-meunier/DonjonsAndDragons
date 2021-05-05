@@ -1,10 +1,11 @@
 import game.Game;
+import menu.Menu;
 
 public class App {
 
     public static void main(String[] args) {
-        Game donjonsAndDragons = new Game();
-        donjonsAndDragons.runGame();
+        Menu menu = new Menu();
+        menu.mainMenu();
     }
 
 }
