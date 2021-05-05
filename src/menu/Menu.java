@@ -3,7 +3,7 @@ package menu;
 import java.util.Scanner;
 
 import characters.Character;
-import characters.Guerrier;
+import characters.Warrior;
 import characters.Magicien;
 
 public class Menu {
@@ -51,7 +51,7 @@ public class Menu {
             switch (choice) {
                 case 1: {
                     String name = tellAnyQuestions("Indiquer le nom du guerrier :");
-                    character = new Guerrier(name);
+                    character = new Warrior(name);
                     System.out.println(character.getName() + " a bien été créé");
                     break;
                 }

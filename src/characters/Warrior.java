@@ -13,14 +13,14 @@ import java.util.Scanner;
  * @version 1.0
  * @see Character
  */
-public class Guerrier extends Character {
+public class Warrior extends Character {
     private Weapon weapon;
     private String shield;
 
     /**
      * Constructeur vide
      */
-    public Guerrier() {
+    public Warrior() {
         this(null);
     }
 
@@ -30,7 +30,7 @@ public class Guerrier extends Character {
      * @param name String
      *             Le nom du guerrier
      */
-    public Guerrier(String name) {
+    public Warrior(String name) {
         this(name, 5, 5);
     }
 
@@ -44,7 +44,7 @@ public class Guerrier extends Character {
      * @param strongLevel int
      *                    Le niveau d'attaque du guerrier de type int
      */
-    public Guerrier(String name, int lifeLevel, int strongLevel) {
+    public Warrior(String name, int lifeLevel, int strongLevel) {
         super(name, lifeLevel, strongLevel);
         this.weapon = null;
         this.shield = "Ecu";
