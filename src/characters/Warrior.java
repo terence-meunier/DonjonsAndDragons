@@ -50,50 +50,6 @@ public class Warrior extends Character {
         this.shield = "Ecu";
     }
 
-    /**
-     * Getter permettant de récupèrer l'arme du guerrier
-     *
-     * @return Weapon weapon
-     * L'arme du guerrier sous la forme d'un objet Weapon
-     * @see Weapon
-     */
-    public Weapon getWeapon() {
-        return weapon;
-    }
-
-    /**
-     * Setter permettnat d'affecter une arme au guerrier
-     *
-     * @param weapon L'arme à affecter de type Weapon
-     * @see Weapon
-     */
-    public void setWeapon(Weapon weapon) {
-        this.weapon = weapon;
-    }
-
-    /**
-     * Getter permettant de récupèrer le bouclier du guerrier
-     *
-     * @return String shield
-     * Le bouclier du guerrier qui est de type String
-     */
-    public String getShield() {
-        return shield;
-    }
-
-    /**
-     * Setter permettnat d'affecter un bouclier au guerrier
-     *
-     * @param shield Le bouclie affecté au guerrier
-     */
-    public void setShield(String shield) {
-        this.shield = shield;
-    }
-
-    public String toString() {
-        return super.toString() + "\n---- EQUIPEMENTS -----\nArme : " + weapon + "\nBouclier : " + shield;
-    }
-
     public void drop(Slot slot) {
         super.drop(slot);
 
@@ -147,5 +103,53 @@ public class Warrior extends Character {
         super.reset();
         lifeLevel = 5;
         weapon = null;
+    }
+
+    public void useWeaponOnEnnemy(Character ennemy) {
+
+    }
+
+    /**
+     * Getter permettant de récupèrer l'arme du guerrier
+     *
+     * @return Weapon weapon
+     * L'arme du guerrier sous la forme d'un objet Weapon
+     * @see Weapon
+     */
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    /**
+     * Setter permettnat d'affecter une arme au guerrier
+     *
+     * @param weapon L'arme à affecter de type Weapon
+     * @see Weapon
+     */
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    /**
+     * Getter permettant de récupèrer le bouclier du guerrier
+     *
+     * @return String shield
+     * Le bouclier du guerrier qui est de type String
+     */
+    public String getShield() {
+        return shield;
+    }
+
+    /**
+     * Setter permettnat d'affecter un bouclier au guerrier
+     *
+     * @param shield Le bouclie affecté au guerrier
+     */
+    public void setShield(String shield) {
+        this.shield = shield;
+    }
+
+    public String toString() {
+        return super.toString() + "\n---- EQUIPEMENTS -----\nArme : " + weapon + "\nBouclier : " + shield;
     }
 }
