@@ -76,7 +76,11 @@ public class Warrior extends Character {
     public void fight(Character ennemy) {
         super.fight(ennemy);
         if (weapon != null) {
-            ennemy.takeDamages(weapon.getAtqLevel());
+            if (weapon.getName() == "Arc" && ennemy.getName() == "Dragon") {
+                ennemy.takeDamages(weapon.getAtqLevel() + 2);
+            } else {
+                ennemy.takeDamages(weapon.getAtqLevel());
+            }
         }
     }
 
