@@ -8,7 +8,7 @@ import characters.Wizard;
 import game.Game;
 import stuffs.Stuff;
 
-public class Menu {
+public class Menu implements ContractMenu {
     private Scanner input;
     private Game game;
 
@@ -89,7 +89,7 @@ public class Menu {
         }
     }
 
-    private void createCharacterMenu() {
+    public void createCharacterMenu() {
         // Afficher le menu principal
         System.out.println("-----------------------");
         System.out.println("--- Create personnage ---");
@@ -115,7 +115,7 @@ public class Menu {
         }
     }
 
-    private void updateCharacterMenu() {
+    public void updateCharacterMenu() {
         System.out.println("------------------------------");
         System.out.println("--- Update personnage ---");
         System.out.println("------------------------------");
@@ -179,7 +179,7 @@ public class Menu {
         }
     }
 
-    public boolean replay() {
+    private boolean replay() {
         int choice = tellAnyQuestionInt("Voulez vous refaire une partie (1: Oui / 2: Non) ?", 1, 2);
         switch (choice) {
             case 1: {
