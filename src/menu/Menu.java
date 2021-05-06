@@ -207,7 +207,13 @@ public class Menu {
                 if (game.getCharacter() instanceof Warrior) {
                     fight();
                 } else {
-                    System.out.println("Les " + game.getCharacter().getName() + " ne s'attaque qu'au Guerrier");
+                    System.out.println("Les Orcs ne s'attaquent pas aux magiciens");
+                }
+            } else if (((Ennemy) game.getGameBoard().getBoard().get(game.getCharacter().getPosition())).getName() == "Bad spirit") {
+                if (game.getCharacter() instanceof Wizard) {
+                    fight();
+                } else {
+                    System.out.println("Les mauvais esprits n'ont pas d'effets sur les guerriers");
                 }
             } else {
                 fight();
