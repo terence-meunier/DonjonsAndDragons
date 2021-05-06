@@ -269,4 +269,20 @@ public class Menu implements ContractMenu {
             game.getGameBoard().getBoard().set(game.getCharacter().getPosition(), null);
         }
     }
+
+    public Scanner getInput() {
+        return input;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setInput(Scanner input) {
+        this.input = input;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
 }

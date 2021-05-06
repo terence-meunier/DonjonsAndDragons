@@ -62,4 +62,16 @@ public class GameBoard {
     public List<Location> getBoard() {
         return board;
     }
+
+    public int getNbCases() {
+        return nbCases;
+    }
+
+    public void setNbCases(int nbCases) {
+        this.nbCases = nbCases;
+    }
+
+    public void setBoard(List<Location> board) {
+        this.board = board;
+    }
 }
