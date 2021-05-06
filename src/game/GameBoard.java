@@ -26,7 +26,7 @@ public class GameBoard {
         for (int i = 0; i < this.nbCases; i++) {
             if (i == 45 || i == 52 || i == 56 || i == 62) {
                 board.add(new Ennemy("Dragon", 15, 4));
-            } else if (i == 10 || i == 20 || i == 25 || i == 32 || i == 35 || i == 36 || i == 37 || i == 40 || i == 44 || i == 47) {
+            } else if (i == 10 || i == 20 || i == 25 || i == 32 || i == 35 || i == 36) {
                 board.add(new Ennemy("Sorcier", 9, 2));
             } else if (i == 3 || i == 6 || i == 9 || i == 12 || i == 15 || i == 18 || i == 21) {
                 board.add(new Ennemy("Gobelin", 6, 1));
@@ -48,6 +48,8 @@ public class GameBoard {
                 board.add(new Ennemy("Bad spirit", 15, 5));
             } else if (i == 24 || i == 27 || i == 30) {
                 board.add(new Weapon("Arc", 4));
+            } else if (i == 37 || i == 40 || i == 44 || i == 47) {
+                board.add(new Spell("Invisibility", 5));
             } else {
                 board.add(null);
             }

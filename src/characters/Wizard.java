@@ -76,7 +76,11 @@ public class Wizard extends Character {
     public void fight(Character ennemy) {
         super.fight(ennemy);
         if (spell != null) {
-            ennemy.takeDamages(spell.getAtqLevel());
+            if (spell.getName() == "Invisibility" && ennemy.getName() == "Bad spirit") {
+                ennemy.takeDamages(spell.getAtqLevel() + 3);
+            } else {
+                ennemy.takeDamages(spell.getAtqLevel());
+            }
         }
     }
 
