@@ -104,7 +104,7 @@ public class Menu implements ContractMenu {
         System.out.println("-----------------------");
         System.out.println("Types de personnage disponible :");
         for (Class subTypeOfCharacter : subTypesOfCharacter) {
-            if (subTypeOfCharacter.getName().equals("characters.Ennemy")) {
+            if (!subTypeOfCharacter.getName().equals("characters.Ennemy")) {
                 String[] subClassName = subTypeOfCharacter.getName().split("[.]");
                 System.out.println(subClassName[1]);
             }
