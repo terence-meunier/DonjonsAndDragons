@@ -21,8 +21,4 @@ public class Elf extends Character {
         super(name, lifeLevel, strongLevel);
     }
 
-    @Override
-    public void dropItem(Location location) {
-
-    }
 }

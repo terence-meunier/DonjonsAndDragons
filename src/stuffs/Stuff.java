@@ -1,5 +1,6 @@
 package stuffs;
 
+import characters.Character;
 import game.Location;
 
 abstract public class Stuff implements Location {
@@ -8,6 +9,8 @@ abstract public class Stuff implements Location {
     public Stuff(String name) {
         this.name = name;
     }
+
+    public abstract void action(Character character);
 
     public String getName() { return name; }
 
