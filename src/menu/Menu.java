@@ -1,7 +1,10 @@
 package menu;
 
 import java.util.Scanner;
+import java.util.Set;
+import org.reflections.Reflections;
 
+import characters.Character;
 import characters.Ennemy;
 import characters.Warrior;
 import characters.Wizard;
@@ -90,29 +93,33 @@ public class Menu implements ContractMenu {
     }
 
     public void createCharacterMenu() {
+
+        // Reflections
+        Reflections reflections = new Reflections();
+        Set<Class<? extends Character>> subTypesOfCharacter = reflections.getSubTypesOf(Character.class);
+
         // Afficher le menu principal
         System.out.println("-----------------------");
         System.out.println("--- Create personnage ---");
         System.out.println("-----------------------");
-        System.out.println("1. Créer un guerrier");
-        System.out.println("2. Créer un magicien");
-        System.out.println("3. Retour vers le menu principal");
-
-        int choice = tellAnyQuestionInt("Votre choix :", 1, 3);
-
-        switch (choice) {
-            case 1: {
-                game.setCharacter(new Warrior(tellAnyQuestion("Quel est le nom du Guerrier ?")));
-                break;
-            }
-            case 2: {
-                game.setCharacter(new Wizard(tellAnyQuestion("Quel est le nom du Magicien ?")));
-                break;
-            }
-            case 3: {
-                break;
+        System.out.println("Types de personnage disponible :");
+        for (Class subTypeOfCharacter : subTypesOfCharacter) {
+            if (subTypeOfCharacter.getName().equals("characters.Ennemy")) {
+                String[] subClassName = subTypeOfCharacter.getName().split("[.]");
+                System.out.println(subClassName[1]);
             }
         }
+        String className = tellAnyQuestion("Donner le type du personnage souhaité :");
+        try {
+            Class c = Class.forName("characters." + className);
+            Object character = c.newInstance();
+            game.setCharacter((Character) character);
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+        String characterName = tellAnyQuestion("Donner le nom du personnage :");
+        game.getCharacter().setName(characterName);
+        System.out.println(game.getCharacter());
     }
 
     public void updateCharacterMenu() {
@@ -181,35 +188,33 @@ public class Menu implements ContractMenu {
 
     private boolean replay() {
         int choice = tellAnyQuestionInt("Voulez vous refaire une partie (1: Oui / 2: Non) ?", 1, 2);
-        switch (choice) {
-            case 1: {
-                game.getCharacter().reset();
-                return true;
-            }
+        if (choice == 1) {
+           game.getCharacter().reset();
+           return true;
         }
         return false;
     }
 
     private void checkPosition() {
-        if(game.getGameBoard().getBoard().get(game.getCharacter().getPosition()) == null) {
+        if (game.getGameBoard().getBoard().get(game.getCharacter().getPosition()) == null) {
             System.out.println("Case vide");
         }
 
-        if(game.getGameBoard().getBoard().get(game.getCharacter().getPosition()) instanceof Stuff) {
+        if (game.getGameBoard().getBoard().get(game.getCharacter().getPosition()) instanceof Stuff) {
             System.out.println("Vous récupérez : " + game.getGameBoard().getBoard().get(game.getCharacter().getPosition()));
             game.getCharacter().dropItem(game.getGameBoard().getBoard().get(game.getCharacter().getPosition()));
             System.out.println("Stats personnage : " + game.getCharacter());
         }
 
-        if(game.getGameBoard().getBoard().get(game.getCharacter().getPosition()) instanceof Ennemy) {
+        if (game.getGameBoard().getBoard().get(game.getCharacter().getPosition()) instanceof Ennemy) {
             System.out.println("Vous rencontrez : " + game.getGameBoard().getBoard().get(game.getCharacter().getPosition()));
-            if (((Ennemy) game.getGameBoard().getBoard().get(game.getCharacter().getPosition())).getName() == "Orc") {
+            if (((Ennemy) game.getGameBoard().getBoard().get(game.getCharacter().getPosition())).getName().equals("Orc")) {
                 if (game.getCharacter() instanceof Warrior) {
                     fight();
                 } else {
                     System.out.println("Les Orcs ne s'attaquent pas aux magiciens");
                 }
-            } else if (((Ennemy) game.getGameBoard().getBoard().get(game.getCharacter().getPosition())).getName() == "Bad spirit") {
+            } else if (((Ennemy) game.getGameBoard().getBoard().get(game.getCharacter().getPosition())).getName().equals("Bad spirit")) {
                 if (game.getCharacter() instanceof Wizard) {
                     fight();
                 } else {

@@ -1,4 +1,3 @@
-import game.Game;
 import menu.Menu;
 
 public class App {
