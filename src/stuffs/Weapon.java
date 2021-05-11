@@ -15,14 +15,15 @@ public class Weapon extends Stuff {
 	@Override
 	public void action(Character character) {
 		if (character instanceof Warrior) {
-			if (((Warrior) character).getWeapon() != null) {
-				if (((Warrior) character).getWeapon().getAtqLevel() < this.atqLevel) {
-					((Warrior) character).setWeapon(this);
+			Warrior w = (Warrior) character;
+			if (w.getWeapon() != null) {
+				if (w.getWeapon().getAtqLevel() < this.atqLevel) {
+					w.setWeapon(this);
 				} else {
 					System.out.println("Sort actuel conservée");
 				}
 			} else {
-				((Warrior) character).setWeapon(this);
+				w.setWeapon(this);
 			}
 		} else {
 			System.out.println("Les armes ne sont que pour les guerriers");

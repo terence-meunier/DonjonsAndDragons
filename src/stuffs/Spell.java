@@ -16,14 +16,15 @@ public class Spell extends Stuff {
     @Override
     public void action(Character character) {
         if (character instanceof Wizard) {
-            if (((Wizard) character).getSpell() != null) {
-                if (((Wizard) character).getSpell().getAtqLevel() < this.atqLevel) {
-                    ((Wizard) character).setSpell(this);
+            Wizard w = (Wizard) character;
+            if (w.getSpell() != null) {
+                if (w.getSpell().getAtqLevel() < this.atqLevel) {
+                    w.setSpell(this);
                 } else {
                     System.out.println("Sort actuel conservée");
                 }
             } else {
-                ((Wizard) character).setSpell(this);
+                w.setSpell(this);
             }
         } else {
             System.out.println("Les sorts ne sont que pour les magiciens");
