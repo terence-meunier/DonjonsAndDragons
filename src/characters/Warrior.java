@@ -51,32 +51,11 @@ public class Warrior extends Character {
         this.shield = "Ecu";
     }
 
-    public void dropItem(Location location) {
-        // L'emplacement contient une potion
-        if (location instanceof Potion) {
-            life += ((Potion) location).getLife();
-            if (life > 10) {
-                life = 10;
-            }
-        }
-
-        // L'emplacement contient une arme
-        if (location instanceof Weapon) {
-            if (weapon == null) {
-                weapon = (Weapon) location;
-            } else {
-                if (((Weapon) location).getAtqLevel() > weapon.getAtqLevel()) {
-                    weapon = (Weapon) location;
-                }
-            }
-        }
-    }
-
     @Override
     public void fight(Character ennemy) {
         super.fight(ennemy);
         if (weapon != null) {
-            if (weapon.getName() == "Arc" && ennemy.getName() == "Dragon") {
+            if (weapon.getName().equals("Arc") && ennemy.getName().equals("Dragon")) {
                 ennemy.takeDamages(weapon.getAtqLevel() + 2);
             } else {
                 ennemy.takeDamages(weapon.getAtqLevel());

@@ -202,7 +202,7 @@ public class Menu implements ContractMenu {
 
         if (game.getGameBoard().getBoard().get(game.getCharacter().getPosition()) instanceof Stuff) {
             System.out.println("Vous récupérez : " + game.getGameBoard().getBoard().get(game.getCharacter().getPosition()));
-            game.getCharacter().dropItem(game.getGameBoard().getBoard().get(game.getCharacter().getPosition()));
+            ((Stuff) game.getGameBoard().getBoard().get(game.getCharacter().getPosition())).action(game.getCharacter());
             System.out.println("Stats personnage : " + game.getCharacter());
         }
 

@@ -25,8 +25,4 @@ public class Ennemy extends Character {
         super(name, life, atk);
     }
 
-    @Override
-    public void dropItem(Location location) {
-
-    }
 }

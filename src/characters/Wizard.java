@@ -51,32 +51,11 @@ public class Wizard extends Character {
         this.filter = "Soin";
     }
 
-    public void dropItem(Location location) {
-        // L'emplacement contient une potion
-        if (location instanceof Potion) {
-            life += ((Potion) location).getLife();
-            if (life > 8) {
-                life = 8;
-            }
-        }
-
-        // L'emplacement contient une arme
-        if (location instanceof Spell) {
-            if (spell == null) {
-                spell = (Spell) location;
-            } else {
-                if (((Spell) location).getAtqLevel() > spell.getAtqLevel()) {
-                    spell = (Spell) location;
-                }
-            }
-        }
-    }
-
     @Override
     public void fight(Character ennemy) {
         super.fight(ennemy);
         if (spell != null) {
-            if (spell.getName() == "Invisibility" && ennemy.getName() == "Bad spirit") {
+            if (spell.getName().equals("Invisibility") && ennemy.getName().equals("Bad spirit")) {
                 ennemy.takeDamages(spell.getAtqLevel() + 3);
             } else {
                 ennemy.takeDamages(spell.getAtqLevel());

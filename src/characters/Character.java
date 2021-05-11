@@ -124,7 +124,7 @@ abstract public class Character implements Location {
     }
 
     /**
-     * Method toString
+     *
      * @return
      */
     @Override
@@ -150,12 +150,6 @@ abstract public class Character implements Location {
             this.position = 63 - out;
         }
     }
-
-    /**
-     * Method for drop an item on the gameboard location
-     * @param location
-     */
-    abstract public void dropItem(Location location);
 
     /**
      * Method for fight an ennemy
