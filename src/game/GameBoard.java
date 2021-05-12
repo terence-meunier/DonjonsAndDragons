@@ -9,17 +9,31 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * GameBoard class represent the gameboard of the game with the nbCases and the array of items
+ *
+ * @author Meunier Terence
+ * @version 1.0
+ *
+ * @see Game
+ */
 public class GameBoard {
     private int nbCases;
     // A changer
     private List<Location> board;
 
+    /**
+     * Constructor
+     */
     public GameBoard() {
         this.nbCases = 64;
         this.board = new ArrayList<Location>();
         generateGameBoard();
     }
 
+    /**
+     * Method to generate a random gameboard with several items
+     */
     private void generateGameBoard() {
 
         // Hard Load

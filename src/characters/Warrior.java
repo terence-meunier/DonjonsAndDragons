@@ -51,6 +51,10 @@ public class Warrior extends Character {
         this.shield = "Ecu";
     }
 
+    /**
+     * Fight with an ennemy
+     * @param ennemy ennemy attack during the fight
+     */
     @Override
     public void fight(Character ennemy) {
         super.fight(ennemy);
@@ -63,14 +67,13 @@ public class Warrior extends Character {
         }
     }
 
+    /**
+     * Reset the life and the weapon of the character
+     */
     public void reset() {
         super.reset();
         life = 5;
         weapon = null;
-    }
-
-    public void useWeaponOnEnnemy(Character ennemy) {
-
     }
 
     /**
