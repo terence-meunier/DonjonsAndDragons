@@ -1,6 +1,11 @@
 package game;
 
 import characters.Character;
+import db.Database;
+
+import javax.xml.crypto.Data;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -22,6 +27,34 @@ public class Game {
         this.character = null;
         this.gameBoard = new GameBoard();
         this.dice = new Dice();
+    }
+
+    public void getHeroes() {
+
+        // On initialise un jeu de résultat vide
+        ResultSet result;
+
+        try {
+            // Appel de la requête SQL
+            result = Database.query("SELECT * FROM Hero");
+
+            // On boucle sur le jeu de résultat reçu
+            while (result.next()) {
+                System.out.println("---------------------");
+                System.out.println("Nom : " + result.getString("Nom"));
+                System.out.println("Type : " + result.getString("Type"));
+                System.out.println("Points de vie : " + result.getInt("NiveauVie") + " pts de vie");
+                System.out.println("Points d'attaque : " + result.getInt("NiveauForce") + " pts de force");
+                System.out.println("Arme : " + result.getString("Arme"));
+                System.out.println("Bouclier : " + result.getString("Bouclier"));
+            }
+        } catch (SQLException e) {
+            // On gère les exceptions possibles
+            System.err.println(e);
+        } finally {
+            // On ferme les ressources
+            Database.close();
+        }
     }
 
     public Character getCharacter() {
