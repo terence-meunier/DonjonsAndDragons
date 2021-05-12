@@ -1,5 +1,7 @@
 package db;
 
+import characters.Character;
+
 import java.sql.*;
 
 public class Database {
@@ -36,9 +38,34 @@ public class Database {
         return statement.executeQuery(query);
     }
 
-    public static int update(String query) throws SQLException {
-        statement = getDB().createStatement();
-        return statement.executeUpdate(query);
+    public static void insert(Character character) throws SQLException {
+        PreparedStatement preparedStatement = getDB().prepareStatement("INSERT INTO Hero (Nom, Type, NiveauVie, NiveauForce, Arme, Bouclier) VALUES (?, ?, ?, ?, ?, ?)");
+
+        String paramNom = character.getName();
+        String paramType = character.getClass().getName().split("[.]")[1];
+        int paramNiveauVie = character.getLife();
+        int paramNiveauForce = character.getAtk();
+        String paramArme = "";
+        String paramBouclier = "";
+
+        preparedStatement.setString(1, paramNom);
+        preparedStatement.setString(2, paramType);
+        preparedStatement.setInt(3, paramNiveauVie);
+        preparedStatement.setInt(4, paramNiveauForce);
+        preparedStatement.setString(5, paramArme);
+        preparedStatement.setString(6, paramBouclier);
+
+        int statut = preparedStatement.executeUpdate();
+
+        if (statut == 1) {
+            System.out.println("La requête à réussie");
+        } else {
+            System.out.println("La requête à échoué");
+        }
+
+        if (preparedStatement != null) {
+            preparedStatement.close();
+        }
     }
 
     public static void close() {

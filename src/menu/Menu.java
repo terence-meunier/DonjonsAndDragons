@@ -7,7 +7,6 @@ import characters.Character;
 import characters.Ennemy;
 import characters.Warrior;
 import characters.Wizard;
-import db.Database;
 import game.Game;
 import stuffs.Stuff;
 
