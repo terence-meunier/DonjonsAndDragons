@@ -3,9 +3,10 @@ package game;
 import characters.Character;
 import db.Database;
 
-import javax.xml.crypto.Data;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -29,7 +30,9 @@ public class Game {
         this.dice = new Dice();
     }
 
-    public void getHeroes() {
+    public Map<Integer, Character> getHeroes() {
+
+        Map<Integer, Character> charactersList = new HashMap<>();
 
         // On initialise un jeu de résultat vide
         ResultSet result;
@@ -40,13 +43,16 @@ public class Game {
 
             // On boucle sur le jeu de résultat reçu
             while (result.next()) {
-                System.out.println("---------------------");
-                System.out.println("Nom : " + result.getString("Nom"));
-                System.out.println("Type : " + result.getString("Type"));
-                System.out.println("Points de vie : " + result.getInt("NiveauVie") + " pts de vie");
-                System.out.println("Points d'attaque : " + result.getInt("NiveauForce") + " pts de force");
-                System.out.println("Arme : " + result.getString("Arme"));
-                System.out.println("Bouclier : " + result.getString("Bouclier"));
+                try{
+                    Class c = Class.forName("characters." + result.getString("Type"));
+                    Character character = (Character) c.newInstance();
+                    character.setName(result.getString("Nom"));
+                    character.setLife(result.getInt("NiveauVie"));
+                    character.setAtk(result.getInt("NiveauForce"));
+                    charactersList.put(result.getInt("Id"), character);
+                } catch (Throwable e) {
+                    System.err.println(e);
+                }
             }
         } catch (SQLException e) {
             // On gère les exceptions possibles
@@ -55,6 +61,7 @@ public class Game {
             // On ferme les ressources
             Database.close();
         }
+        return charactersList;
     }
 
     public Character getCharacter() {
