@@ -68,6 +68,14 @@ public class Menu implements ContractMenu {
      */
     public void mainMenu() {
 
+        // Affichage des personnages disponibles
+        System.out.println("-------------------------------");
+        System.out.println("--- Personnages disponibles ---");
+        System.out.println("-------------------------------");
+
+        // Appel à la base de données
+        game.getHeroes();
+
         // Afficher le menu principal
         System.out.println("----------------------");
         System.out.println("--- Menu principal ---");
