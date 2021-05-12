@@ -7,6 +7,7 @@ import characters.Character;
 import characters.Ennemy;
 import characters.Warrior;
 import characters.Wizard;
+import db.Database;
 import game.Game;
 import stuffs.Stuff;
 
@@ -95,6 +96,8 @@ public class Menu implements ContractMenu {
                     createCharacterMenu();
                 } else {
                     updateCharacterMenu();
+                    // Sauvegarde en base de la modification
+                    game.setHero(game.getCharacter());
                 }
                 mainMenu();
                 break;
@@ -127,13 +130,15 @@ public class Menu implements ContractMenu {
 
         // Appel à la base de données
         Map<Integer, Character> charactersList = game.getHeroes();
+        int max = 0;
         for (Map.Entry<Integer, Character> entry :charactersList.entrySet()) {
             System.out.println("---------------------------");
             System.out.println("Choix n°" + entry.getKey());
             System.out.println(entry.getValue());
+            max = entry.getKey();
         }
 
-        int choice = tellAnyQuestionInt("Donner votre choix :", 1, charactersList.size());
+        int choice = tellAnyQuestionInt("Donner votre choix :", 1, max);
         game.setCharacter(charactersList.get(choice));
     }
 
@@ -162,10 +167,10 @@ public class Menu implements ContractMenu {
             case 2: {
                 if (game.getCharacter() instanceof Warrior) {
                     game.getCharacter().setLife(tellAnyQuestionInt("Donner la vie souhaité (entre 5 et 10) : ", 5, 10));
-                }
-
-                if (game.getCharacter() instanceof Wizard) {
+                } else if (game.getCharacter() instanceof Wizard) {
                     game.getCharacter().setLife(tellAnyQuestionInt("Donner la vie souhaité (entre 3 et 8) : ", 3, 8));
+                } else {
+                    game.getCharacter().setLife(tellAnyQuestionInt("Donner la vie souhaité (entre 4 et 7) : ", 4, 7));
                 }
                 updateCharacterMenu();
                 break;

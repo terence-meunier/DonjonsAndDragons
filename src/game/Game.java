@@ -64,6 +64,52 @@ public class Game {
         return charactersList;
     }
 
+    public boolean heroExist(String name) {
+        ResultSet result;
+        boolean heroExist = false;
+        try {
+            result = Database.query("SELECT Nom FROM Hero WHERE Nom='" + name + "'");
+            if (result.first()) {
+                heroExist = true;
+            }
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+        return heroExist;
+    }
+
+    public void setHero(Character character) {
+        String query;
+        if (heroExist(character.getName())) {
+            System.out.println("Mise à jour");
+            String type = character.getClass().getName().split("[.]")[1];
+            query = "UPDATE Hero SET Nom='" + character.getName() +
+                    "', Type='" + type +
+                    "', NiveauVie='" + character.getLife() +
+                    "', NiveauForce='" + character.getAtk() +
+                    "', Arme=''" +
+                    ", Bouclier='' WHERE Nom='" + character.getName() + "'";
+        } else {
+            System.out.println("Création d'un joueur");
+            String type = character.getClass().getName().split("[.]")[1];
+            query = "INSERT INTO Hero (Nom, Type, NiveauVie, NiveauForce, Arme, Bouclier) VALUES ('"
+                    + character.getName() + "', '"
+                    + type + "', '"
+                    + character.getLife() + "', '"
+                    + character.getAtk() + "', '', '')";
+        }
+        try {
+            int statut = Database.update(query);
+            if (statut == 1) {
+                System.out.println("Joueur : " + character.getName() + " sauvegardé");
+            } else {
+                System.out.println("Joueur : " + character.getName() + " non sauvegardé");
+            }
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+    }
+
     public Character getCharacter() {
         return character;
     }

@@ -33,14 +33,19 @@ public class Database {
 
     public static ResultSet query(String query) throws SQLException {
         statement = getDB().createStatement();
-        result = statement.executeQuery(query);
-        return result;
+        return statement.executeQuery(query);
+    }
+
+    public static int update(String query) throws SQLException {
+        statement = getDB().createStatement();
+        return statement.executeUpdate(query);
     }
 
     public static void close() {
         if (result != null) {
             try {
                 result.close();
+                result = null;
             } catch (SQLException e) {
                 System.err.println(e);
             }
@@ -48,6 +53,7 @@ public class Database {
         if (statement != null) {
             try {
                 statement.close();
+                statement = null;
             } catch (SQLException e) {
                 System.err.println(e);
             }
@@ -55,6 +61,7 @@ public class Database {
         if (connector != null) {
             try {
                 connector.close();
+                connector = null;
             } catch (SQLException e) {
                 System.err.println(e);
             }
