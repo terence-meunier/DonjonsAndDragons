@@ -1,8 +1,7 @@
 package menu;
 
+import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
-import org.reflections.Reflections;
 
 import characters.Character;
 import characters.Ennemy;
@@ -68,14 +67,6 @@ public class Menu implements ContractMenu {
      */
     public void mainMenu() {
 
-        // Affichage des personnages disponibles
-        System.out.println("-------------------------------");
-        System.out.println("--- Personnages disponibles ---");
-        System.out.println("-------------------------------");
-
-        // Appel à la base de données
-        game.getHeroes();
-
         // Afficher le menu principal
         System.out.println("----------------------");
         System.out.println("--- Menu principal ---");
@@ -85,7 +76,7 @@ public class Menu implements ContractMenu {
         } else {
             System.out.println("Personnage actuel : Aucun");
         }
-        System.out.println("1. Créer un nouveau personnage");
+        System.out.println("1. Choisir un joueur");
         System.out.println("2. Modifier le personnage actuel");
         System.out.println("3. Lancer le jeu");
         System.out.println("4. Quitter le jeu");
@@ -100,7 +91,7 @@ public class Menu implements ContractMenu {
             }
             case 2: {
                 if (game.getCharacter() == null) {
-                    System.out.println("Merci de créer un personnage !");
+                    System.out.println("Merci de choisir un personnage !");
                     createCharacterMenu();
                 } else {
                     updateCharacterMenu();
@@ -129,32 +120,21 @@ public class Menu implements ContractMenu {
      */
     public void createCharacterMenu() {
 
-        // Reflections
-        Reflections reflections = new Reflections();
-        Set<Class<? extends Character>> subTypesOfCharacter = reflections.getSubTypesOf(Character.class);
+        // Affichage des personnages disponibles
+        System.out.println("-------------------------------");
+        System.out.println("--- Personnages disponibles ---");
+        System.out.println("-------------------------------");
 
-        // Afficher le menu principal
-        System.out.println("-----------------------");
-        System.out.println("--- Create personnage ---");
-        System.out.println("-----------------------");
-        System.out.println("Types de personnage disponible :");
-        for (Class subTypeOfCharacter : subTypesOfCharacter) {
-            if (!subTypeOfCharacter.getName().equals("characters.Ennemy")) {
-                String[] subClassName = subTypeOfCharacter.getName().split("[.]");
-                System.out.println(subClassName[1]);
-            }
+        // Appel à la base de données
+        Map<Integer, Character> charactersList = game.getHeroes();
+        for (Map.Entry<Integer, Character> entry :charactersList.entrySet()) {
+            System.out.println("---------------------------");
+            System.out.println("Choix n°" + entry.getKey());
+            System.out.println(entry.getValue());
         }
-        String className = tellAnyQuestion("Donner le type du personnage souhaité :");
-        try {
-            Class c = Class.forName("characters." + className);
-            Object character = c.newInstance();
-            game.setCharacter((Character) character);
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-        String characterName = tellAnyQuestion("Donner le nom du personnage :");
-        game.getCharacter().setName(characterName);
-        System.out.println(game.getCharacter());
+
+        int choice = tellAnyQuestionInt("Donner votre choix :", 1, charactersList.size());
+        game.setCharacter(charactersList.get(choice));
     }
 
     /**
