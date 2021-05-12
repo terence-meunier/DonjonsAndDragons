@@ -10,11 +10,11 @@ public class Database {
     private static int port = 3306;
     private static String driver = "mysql";
     private static Connection connector = null;
-
-    private static String db = null;
+    private static Statement statement = null;
+    private static ResultSet result = null;
 
     private static Connection getDB() {
-        if (db == null) {
+        if (connector == null) {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
             } catch (ClassNotFoundException e) {
@@ -26,16 +26,38 @@ public class Database {
                 connector = DriverManager.getConnection(url, user, pass);
             } catch (SQLException e) {
                 System.err.println(e);
-            } finally {
-                return connector;
             }
-        } else {
-            return connector;
         }
+        return connector;
     }
 
-    public static ResultSet result(String query) throws SQLException {
-        Statement statement = getDB().createStatement();
-        return statement.executeQuery(query);
+    public static ResultSet query(String query) throws SQLException {
+        statement = getDB().createStatement();
+        result = statement.executeQuery(query);
+        return result;
+    }
+
+    public static void close() {
+        if (result != null) {
+            try {
+                result.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+        if (statement != null) {
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+        if (connector != null) {
+            try {
+                connector.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
     }
 }
