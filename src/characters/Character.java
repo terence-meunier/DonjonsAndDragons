@@ -1,12 +1,10 @@
 package characters;
 
 import game.Location;
-import stuffs.Potion;
 
 /**
  *
- * Classe abstraite Character qui permet de créer des classes
- * avec un nom, un niveau de vie et un niveau de points d'attaque.
+ * Abstract class Character
  *
  * @see Character#Character(String, int, int)
  *
@@ -123,10 +121,6 @@ abstract public class Character implements Location {
         this.atk = strongLevel;
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public String toString() {
         String output = "";
@@ -141,7 +135,7 @@ abstract public class Character implements Location {
 
     /**
      * Method for move the player on the gameboard with throw dice
-     * @param throwDice
+     * @param throwDice the dice number return by throwDice method of the Dice
      */
     public void move(int throwDice) {
         int out = throwDice - (63 - this.position);
@@ -153,7 +147,7 @@ abstract public class Character implements Location {
 
     /**
      * Method for fight an ennemy
-     * @param ennemy
+     * @param ennemy ennemy attack during the fight
      */
     public void fight(Character ennemy) {
         ennemy.takeDamages(atk);
@@ -161,7 +155,7 @@ abstract public class Character implements Location {
 
     /**
      * Method for take damages
-     * @param damages
+     * @param damages damages inflige by the ennemy
      */
     public void takeDamages(int damages) {
         life -= damages;
@@ -176,14 +170,16 @@ abstract public class Character implements Location {
 
     /**
      * Method for test if the character is alive
-     * @return
+     * @return return if the character is alive
      */
     public boolean isAlive() {
         return life > 0;
     }
 
     /**
-     * Method for escape
+     * Escape method for the escape a fight with an ennemy
+     *
+     * @param nbcases number of cases to return back
      */
     public void escape(int nbcases) {
         position -= nbcases;

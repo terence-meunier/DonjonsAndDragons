@@ -1,5 +1,11 @@
 package menu;
 
+/**
+ * Interface Contract Menu
+ *
+ * @author Meunier Terence
+ * @version 1.0
+ */
 public interface ContractMenu {
 
     /**

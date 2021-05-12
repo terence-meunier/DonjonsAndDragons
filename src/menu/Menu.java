@@ -11,6 +11,15 @@ import characters.Wizard;
 import game.Game;
 import stuffs.Stuff;
 
+/**
+ * Menu class control the interface with the user
+ *
+ * Implements ContractMenu interface
+ *
+ * @author Meunier Terence
+ * @version 1.0
+ * @see ContractMenu
+ */
 public class Menu implements ContractMenu {
     private Scanner input;
     private Game game;
@@ -20,11 +29,23 @@ public class Menu implements ContractMenu {
         this.game = new Game();
     }
 
+    /**
+     * Tell a Question to the user
+     * @param question
+     * @return
+     */
     private String tellAnyQuestion(String question) {
         System.out.println(question);
         return input.nextLine();
     }
 
+    /**
+     * Tell a Question to the user with number choices between minRange and maxRange
+     * @param question
+     * @param minRange
+     * @param maxRange
+     * @return
+     */
     private int tellAnyQuestionInt(String question, int minRange, int maxRange) {
         System.out.println(question);
         try {
@@ -42,6 +63,9 @@ public class Menu implements ContractMenu {
         return tellAnyQuestionInt(question, minRange, maxRange);
     }
 
+    /**
+     * Main menu for create, update and launch the game
+     */
     public void mainMenu() {
 
         // Afficher le menu principal
@@ -92,6 +116,9 @@ public class Menu implements ContractMenu {
         }
     }
 
+    /**
+     * Create Character Menu for create character and choice the type and name of character
+     */
     public void createCharacterMenu() {
 
         // Reflections
@@ -122,6 +149,9 @@ public class Menu implements ContractMenu {
         System.out.println(game.getCharacter());
     }
 
+    /**
+     * Update character menu for set name, life points
+     */
     public void updateCharacterMenu() {
         System.out.println("------------------------------");
         System.out.println("--- Update personnage ---");
@@ -158,6 +188,9 @@ public class Menu implements ContractMenu {
         }
     }
 
+    /**
+     * Play menu for round by round
+     */
     public void playMenu() {
         System.out.println();
         System.out.println("*************************************");
@@ -186,6 +219,10 @@ public class Menu implements ContractMenu {
         }
     }
 
+    /**
+     * Replay menu for continue the game or stop the game
+     * @return
+     */
     private boolean replay() {
         int choice = tellAnyQuestionInt("Voulez vous refaire une partie (1: Oui / 2: Non) ?", 1, 2);
         if (choice == 1) {
@@ -195,6 +232,9 @@ public class Menu implements ContractMenu {
         return false;
     }
 
+    /**
+     * Check the player position for interaction with the gameboard case.
+     */
     private void checkPosition() {
         if (game.getGameBoard().getBoard().get(game.getCharacter().getPosition()) == null) {
             System.out.println("Case vide");
@@ -236,6 +276,9 @@ public class Menu implements ContractMenu {
         }
     }
 
+    /**
+     * Fight menu for the round by round fight with the ennemy
+     */
     private void fight() {
         // On frappe l'ennemie
         System.out.println("Vous frappez l'ennemie");

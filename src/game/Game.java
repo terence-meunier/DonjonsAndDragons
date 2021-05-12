@@ -1,14 +1,23 @@
 package game;
 
-// Character
 import characters.Character;
 
+/**
+ *
+ * Game class for the control of the game
+ *
+ * @author Meunier Terence
+ * @version 1.0
+ */
 public class Game {
 
     private Character character;
     private GameBoard gameBoard;
     private Dice dice;
 
+    /**
+     * Constructor includes a character, a gameboard and a dice
+     */
     public Game() {
         this.character = null;
         this.gameBoard = new GameBoard();

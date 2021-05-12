@@ -2,16 +2,33 @@ package stuffs;
 
 import characters.Character;
 import characters.Warrior;
-import characters.Wizard;
 
+/**
+ * Weapon class only for the Warrior class
+ *
+ * @author Meunier Terence
+ * @version 1.0
+ *
+ * @see Stuff
+ * @see Warrior
+ */
 public class Weapon extends Stuff {
 	private int atqLevel;
-	
+
+	/**
+	 * Constructor with name and atqLevel
+	 * @param name name of the weapon
+	 * @param atqLevel atq level of the weapon
+	 */
 	public Weapon(String name, int atqLevel) {
 		super(name);
 		this.atqLevel = atqLevel;
 	}
 
+	/**
+	 * Action for assign weapon to the Warrior
+	 * @param character character who receive the weapon
+	 */
 	@Override
 	public void action(Character character) {
 		if (character instanceof Warrior) {
