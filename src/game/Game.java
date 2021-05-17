@@ -66,7 +66,7 @@ public class Game {
 
     public void setHero(Character character) {
         try {
-            Database.insert(character);
+            Database.save(character);
         } catch (SQLException e) {
             System.err.println(e);
         } finally {
